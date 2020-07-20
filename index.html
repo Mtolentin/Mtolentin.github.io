@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>Hello World</title>
 </head>
-  <script src="pixi/pixi.min.js"></script>
+  <script src="lib/pixi.min.js"></script>
+  <script src="lib/tink.js"></script>
 <body>
   <script type="text/javascript">
     let type = "WebGL"
@@ -12,7 +13,49 @@
       type = "canvas"
     }
 
-    PIXI.utils.sayHello(type)
+    //PIXI.utils.sayHello("Sup homie")
+    //Create a Pixi Application
+    //let app = new PIXI.Application({width: 256, height: 256});
+
+    let app = new PIXI.Application({ 
+      width: 256,         // default: 800
+      height: 256,        // default: 600
+      antialias: true,    // default: false
+      transparent: false, // default: false
+      resolution: 1       // default: 1
+      //resizeTo (HTMLElement)
+      }
+    );
+
+    game = new Game(app.view, function () {
+      game.loadSong('songs/Idol/Idol.sm', function () { game.start(); } );
+      });
+    document.body.appendChild(app.view);
+    //let t = new Tink(PIXI, renderer.view);
+
   </script>
 </body>
 </html>
+
+<!-- 
+  // Create the application
+  const app = new PIXI.Application();
+
+  // Add the view to the DOM 
+  document.body.appendChild(app.view);
+
+  // ex, add display objects
+  app.stage.addChild(PIXI.Sprite.from('something.png'));
+
+
+
+ticker PIXI.Ticker
+
+    Ticker for doing render updates.
+
+    Default Value:
+
+            PIXI.Ticker.shared
+
+
+-->
