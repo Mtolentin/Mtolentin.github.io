@@ -1,61 +1,13 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+
 <head>
-  <meta charset="utf-8">
-  <title>Hello World</title>
+  <title>EventListener_Revolution</title>
+  <script type="text/javascript" src="dist/main.js" charset="utf-8" defer></script>
 </head>
-  <script src="lib/pixi.min.js"></script>
-  <script src="lib/tink.js"></script>
+
 <body>
-  <script type="text/javascript">
-    let type = "WebGL"
-    if(!PIXI.utils.isWebGLSupported()){
-      type = "canvas"
-    }
-
-    //PIXI.utils.sayHello("Sup homie")
-    //Create a Pixi Application
-    //let app = new PIXI.Application({width: 256, height: 256});
-
-    let app = new PIXI.Application({ 
-      width: 256,         // default: 800
-      height: 256,        // default: 600
-      antialias: true,    // default: false
-      transparent: false, // default: false
-      resolution: 1       // default: 1
-      //resizeTo (HTMLElement)
-      }
-    );
-
-    game = new Game(app.view, function () {
-      game.loadSong('songs/Idol/Idol.sm', function () { game.start(); } );
-      });
-    document.body.appendChild(app.view);
-    //let t = new Tink(PIXI, renderer.view);
-
-  </script>
+  <h1>EL_R</h1>
+  <canvas id="dance-game" height="800" width="600"></canvas>
 </body>
+
 </html>
-
-<!-- 
-  // Create the application
-  const app = new PIXI.Application();
-
-  // Add the view to the DOM 
-  document.body.appendChild(app.view);
-
-  // ex, add display objects
-  app.stage.addChild(PIXI.Sprite.from('something.png'));
-
-
-
-ticker PIXI.Ticker
-
-    Ticker for doing render updates.
-
-    Default Value:
-
-            PIXI.Ticker.shared
-
-
--->
