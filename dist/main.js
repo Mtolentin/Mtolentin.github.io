@@ -86,38 +86,14 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/game.js":
-/*!*********************!*\
-  !*** ./src/game.js ***!
-  \*********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return EventListener_Revolution; });\n/* harmony import */ var _nirvana__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nirvana */ \"./src/nirvana.js\");\n/* harmony import */ var _nirvana__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_nirvana__WEBPACK_IMPORTED_MODULE_0__);\n\n\nclass EventListener_Revolution {\n  constructor(canvas){\n    this.ctx = canvas.getContext(\"2d\");\n    this.dimensions = { width: canvas.width, height: canvas.height };\n    this.ctx.fillStyle = \"white\";\n    this.ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);\n    this.displayMenu.bind(this);\n    this.displayMenu();\n    \n  }\n\n\n  //Function to check whether a point is inside a rectangle\n\n  \n  displayMenu() {\n    this.ctx.beginPath();\n    this.ctx.rect(250, 350, 200, 100);\n    this.ctx.fillStyle = '#FFFFFF';\n    this.ctx.fillStyle = 'green';\n    this.ctx.fillRect(25, 72, 32, 32);\n    this.ctx.fill();\n    this.ctx.lineWidth = 2;\n    this.ctx.strokeStyle = '#000000';\n    this.ctx.stroke();\n    this.ctx.closePath();\n    this.ctx.font = '40pt Kremlin Pro Web';\n    this.ctx.fillStyle = '#000000';\n    this.ctx.fillText('Start', 345, 415);\n    \n    var canvas = document.getElementById('dance-game');\n    \n    debugger\n    //The rectangle should have x,y,width,height properties\n    \n    //Binding the click event on the canvas\n    canvas.addEventListener('click', function (evt) {\n      // let rect = {\n      //   x: 250,\n      //   y: 350,\n      //   width: 200,\n      //   height: 100\n      // };\n      debugger\n      const rect = this.getBoundingClientRect();\n      const mousePos = {\n        x: evt.clientX - rect.left,\n        y: evt.clientY - rect.top\n      };\n      // isInside(pos, rect) {\n      //   return pos.x > rect.x && pos.x < rect.x + rect.width && pos.y < rect.y + rect.height && pos.y > rect.y\n      // }\n      if (isInside(mousePos, rect)) {\n        // alert('clicked inside rect');\n        console.log(\"Inside\");\n      } else {\n        // alert('clicked outside rect');\n        console.log(\"Outside\");\n      }\n    }, false);\n  }\n  \n\n\n}\n\n//# sourceURL=webpack:///./src/game.js?");
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\n\nconst canvas = document.getElementById('dance-game');\nnew _game__WEBPACK_IMPORTED_MODULE_0__[\"default\"](canvas);\n\n//# sourceURL=webpack:///./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/nirvana.js":
-/*!************************!*\
-  !*** ./src/nirvana.js ***!
-  \************************/
-/*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// export default class Level {\n//   constructor(dimensions) {\n//     this.dimensions = dimensions;\n//   }\n\n//   drawBackground(ctx) {\n//     ctx.fillStyle = \"skyblue\";\n//     ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);\n//   }\n// }\n\n//# sourceURL=webpack:///./src/nirvana.js?");
+eval("throw new Error(\"Module parse failed: Unexpected token (6:32)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n| new EventListener_Revolution(canvas);\\n| \\n> initButtonTest = function (evt) => {\\n|     {\\n|         const offset = this.getBoundingClientRect();\");\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
