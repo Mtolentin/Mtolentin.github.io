@@ -4,16 +4,14 @@ export default class EventListener_Revolution {
   constructor(canvas){
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
-    this.ctx.fillStyle = "white";
-    this.ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.displayMenu.bind(this);
     this.displayMenu();
     
   }
   
   displayMenu(){
-    debugger
-    this.ctx.clearRect();
+    this.ctx.fillStyle = "white";
+    this.ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
     this.ctx.beginPath();
     this.ctx.rect(250, 350, 200, 100);
     this.ctx.fillStyle = '#FFFFFF';
