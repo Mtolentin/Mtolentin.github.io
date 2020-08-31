@@ -25,8 +25,11 @@ function initButtonTest(evt) {
             pos.x < rect.x + rect.width &&
             pos.y < rect.y + rect.height &&
             pos.y > rect.y) {
+
             // alert('clicked inside rect');
-            console.log("Inside");
+            // console.log("Inside");
+            game.hallAndOats(canvas);
+
         } else {
             // alert('clicked outside rect');
             console.log("Outside");
