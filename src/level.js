@@ -1,23 +1,19 @@
 export function dibujar(canvas) {
 
-    let arrowLeft = new Image();
-    let arrowDown = new Image();
-    let arrowUp = new Image();
-    let arrowRight = new Image();
+    let stageArrow = new Image();
+ 
+    stageArrow.src = "./dist/assets/arrows/aStage.png";
 
-    arrowLeft.src = "./dist/assets/arrows/aStage3.png"
-    // arrowDown.src = "../dist/aStage2.png"
-    // arrowUp.src = "../dist/aStage3.png"
-    // arrowRight.src = "../dist/aStage4.png"
 
-    arrowLeft.addEventListener("load", loadImage, false);
-    // arrowDown.addEventListener("load", loadImage, false);
-    // arrowUp.addEventListener("load", loadImage, false);
-    // arrowRight.addEventListener("load", loadImage, false);
+    stageArrow.addEventListener("load", loadImage, false);
+
 
     let context = canvas.getContext("2d");
 
     function loadImage(evt) {
+        let bg = document.getElementsByClassName("songList");
+        bg[1].id = "playing";
+        bg[1].play();
         animate();
     }
     
@@ -33,8 +29,8 @@ export function dibujar(canvas) {
         let numRows = 20;
 
         // Define the size of a frame
-        let frameWidth = arrowLeft.width / numColumns;;
-        let frameHeight = arrowLeft.height / numRows;;
+        let frameWidth = stageArrow.width / numColumns;;
+        let frameHeight = stageArrow.height / numRows;;
 
         // The sprite image frame starts from 0
         let currentFrame = 0;
@@ -55,28 +51,54 @@ export function dibujar(canvas) {
             let column = currentFrame % numColumns;
             let row = Math.floor(currentFrame / numColumns);
 
-            // Clear and draw
-            // context.clearRect(0, 0, canvas.width, canvas.height);
-            context.drawImage(arrowLeft, column * frameWidth, row * frameHeight, frameWidth, frameHeight, 10, 30, frameWidth, frameHeight);
+            context.clearRect(0, 0, canvas.width, canvas.height);
 
-        //Wait for next step in the loop
-        }, 30);
+            // Save the current context  
+            // Translate to the center point of our image  
+            // Perform the rotation  
+            // Translate back to the top left of our image  
+            // Finally we draw the image  
+            //context.drawImage(stageArrow, 0, 0);
+            // And restore the context ready for the next loop  
+            
+            context.save();
+            context.translate(206, 69);
+            context.rotate(Math.PI*3/2);
+            context.translate(-59, -42);
+            context.drawImage(
+                stageArrow, column * frameWidth, row * frameHeight,
+                frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
+            context.restore();
 
-        // context.clearRect(120, 25, 300, 300);
-    
-        //draw each frame + place them in the middle
-        // context.drawImage(arrowLeft, shift, 0, frameWidth, frameHeight,
-        //                 120, 25, frameWidth, frameHeight);
-    
-        // shift += frameWidth + 1;
-    
-        // if (currentFrame == totalFrames) {
-        // shift = 0;
-        // currentFrame = 0;
-        // }
-        // currentFrame++;
-        
-        // requestAnimationFrame(animate);
+            context.save();
+            context.translate(335, 69);
+            context.rotate(Math.PI);
+            context.translate(-66, -59);
+            context.drawImage(
+                stageArrow, column * frameWidth, row * frameHeight,
+                frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
+            context.restore();
+
+            context.save();
+            context.translate(400, 10);
+            context.drawImage(
+                stageArrow, column * frameWidth, row * frameHeight,
+                frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
+            context.restore();
+
+            context.save();
+            context.translate(592, 69);
+            context.rotate(Math.PI / 2);
+            context.translate(-59, -44);
+            context.drawImage(
+                stageArrow, column * frameWidth, row * frameHeight,
+                frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
+            context.restore();  
+            
+            //Wait for next step in the loop
+        }, 15);
+
+
     }
 
 }

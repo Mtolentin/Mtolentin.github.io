@@ -9,3 +9,19 @@ body {
     margin: 0px auto;
     border: 1px solid cyan;
 }
+
+video {
+    position: absolute;
+    object-fit: fill;
+    overflow: hidden;
+    z-index: 1;
+}
+
+canvas {
+    position: absolute;
+    z-index: 2;
+}
+
+#halted {
+    display: none;
+}

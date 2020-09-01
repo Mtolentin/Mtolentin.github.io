@@ -17,9 +17,6 @@ function initButtonTest(evt) {
             y: evt.clientY
         };
         
-        // console.log(offset);
-        // console.log(rect);
-        // console.log(pos);
 
         if (pos.x > rect.x &&
             pos.x < rect.x + rect.width &&
@@ -31,7 +28,6 @@ function initButtonTest(evt) {
             game.hallAndOats(canvas);
 
         } else {
-            // alert('clicked outside rect');
             console.log("Outside");
         }
     }
