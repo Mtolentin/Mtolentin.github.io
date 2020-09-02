@@ -25,7 +25,7 @@ function initButtonTest(evt) {
 
             // alert('clicked inside rect');
             // console.log("Inside");
-            game.hallAndOats(canvas);
+            game.hallAndOats(canvas, initButtonTest);
 
         } else {
             console.log("Outside");

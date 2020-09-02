@@ -29,8 +29,8 @@ export default class EventListener_Revolution {
     //var canvas = document.getElementById('dance-game');
   }
 
-  hallAndOats(canvas){
-    level_util.dibujar(canvas);
+  hallAndOats(canvas, eLF){
+    level_util.dibujar(canvas, eLF);
 
   }
   

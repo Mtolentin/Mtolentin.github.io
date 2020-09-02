@@ -1,19 +1,22 @@
-export function dibujar(canvas) {
+export function dibujar(canvas, eLF) {
 
+    debugger
+    canvas.removeEventListener( 'click', eLF );
     let stageArrow = new Image();
  
     stageArrow.src = "./dist/assets/arrows/aStage.png";
 
 
-    stageArrow.addEventListener("load", loadImage, false);
+    stageArrow.addEventListener("load", loadImage);
 
 
     let context = canvas.getContext("2d");
 
     function loadImage(evt) {
         let bg = document.getElementsByClassName("songList");
-        bg[1].id = "playing";
-        bg[1].play();
+        bg[0].id = "playing";
+        while(bg[0].readyState != 4) {}
+        bg[0].play();
         animate();
     }
     
@@ -24,20 +27,24 @@ export function dibujar(canvas) {
     // var currentFrame = 0;
     
     function animate() {
-        // Define the number of columns and rows in the sprite
+        let origin = Date.now();
+        console.log(Date.now() - origin);
+        document.addEventListener("keydown", registerPress);
+
         let numColumns = 5;
         let numRows = 20;
-
-        // Define the size of a frame
         let frameWidth = stageArrow.width / numColumns;;
         let frameHeight = stageArrow.height / numRows;;
-
-        // The sprite image frame starts from 0
         let currentFrame = 0;
+
+        function registerPress(evt) {
+            evt.preventDefault();
+            console.log([(Date.now() - origin) / 1000, evt.key]);
+        }
 
         setInterval(function()
         {
-            console.log(currentFrame);
+            // console.log(currentFrame);
             // Pick a new frame
             currentFrame++;
 
@@ -52,14 +59,6 @@ export function dibujar(canvas) {
             let row = Math.floor(currentFrame / numColumns);
 
             context.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Save the current context  
-            // Translate to the center point of our image  
-            // Perform the rotation  
-            // Translate back to the top left of our image  
-            // Finally we draw the image  
-            //context.drawImage(stageArrow, 0, 0);
-            // And restore the context ready for the next loop  
             
             context.save();
             context.translate(206, 69);
@@ -95,10 +94,13 @@ export function dibujar(canvas) {
                 frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
             context.restore();  
             
-            //Wait for next step in the loop
+
+
         }, 15);
 
 
     }
+
+
 
 }
