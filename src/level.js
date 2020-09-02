@@ -3,15 +3,14 @@ const ArrowQueue = require("./arrowQueue");
 export function dibujar(canvas, eLF) {
 
     canvas.removeEventListener( 'click', eLF );
+    let context = canvas.getContext("2d");
+
     let stageArrow = new Image();
+    let queueArrow = new Image();
  
     stageArrow.src = "./dist/assets/arrows/aStage.png";
-
-
-    stageArrow.addEventListener("load", loadImage);
-
-
-    let context = canvas.getContext("2d");
+    queueArrow.src = "./dist/assets/arrows/aNote.png"
+    queueArrow.addEventListener("load", loadImage);
 
     function loadImage(evt) {
         let bg = document.getElementsByClassName("songList");
@@ -43,7 +42,7 @@ export function dibujar(canvas, eLF) {
             console.log([(Date.now() - origin) / 1000, evt.key]);
         }
 
-        let theQueue = new ArrowQueue();
+        let theQueue = new ArrowQueue(context);
         //timed arrow array
 
 
@@ -99,6 +98,9 @@ export function dibujar(canvas, eLF) {
                 frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
             context.restore();  
             
+            theQueue.forEach( arrow => {
+                
+            })
 
 
         }, 15);

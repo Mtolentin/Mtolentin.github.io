@@ -13,9 +13,13 @@ ArrowQueue.prototype.spawn = function spawn(direction, bpm) {
 
 }
 
-ArrowQueue.prototype.move = function move() {
+ArrowQueue.prototype.move = function move(canvas) {
     this.arrows.forEach( arrow => {
         arrow[pos] -= spd;
+        if (arrow[pos] <= 0) {
+            this.arrows.splice(this.arrows.indexOf(arrow),1);
+            //draw 'missed' using context
+        }
     });
 }
 
