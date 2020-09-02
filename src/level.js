@@ -1,6 +1,7 @@
+const ArrowQueue = require("./arrowQueue");
+
 export function dibujar(canvas, eLF) {
 
-    debugger
     canvas.removeEventListener( 'click', eLF );
     let stageArrow = new Image();
  
@@ -41,6 +42,10 @@ export function dibujar(canvas, eLF) {
             evt.preventDefault();
             console.log([(Date.now() - origin) / 1000, evt.key]);
         }
+
+        let theQueue = new ArrowQueue();
+        //timed arrow array
+
 
         setInterval(function()
         {
