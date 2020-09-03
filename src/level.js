@@ -63,6 +63,32 @@ export function dibujar(canvas, eLF) {
             let row = Math.floor(currentFrame / numColumns);
 
             context.clearRect(0, 0, canvas.width, canvas.height);
+
+            function drawArrow(type, direction) {
+                let arrowParams = [];
+
+                switch(direction){
+                    case "left":
+                        arrowParams.push( [206, 69, Math.PI * 3/2, -59, -42] );
+                        arrowParams.push( [ ] );
+                        break;
+                    case "down":
+                        arrowParams.push( [335, 69, Math.PI      , -66, -59] );
+                        arrowParams.push([]);
+                        break;
+                    case "up":
+                        arrowParams.push( [400, 10, 0            ,   0,   0] );
+                        arrowParams.push([]);
+                        break;
+                    default:
+                        arrowParams.push( [592, 69, Math.PI / 2  , -59, -44] );
+                        arrowParams.push([]);
+                        break;
+                }
+
+
+
+            }
             
             context.save();
             context.translate(206, 69);
