@@ -12,7 +12,7 @@ export function dibujar(canvas, eLF, chosenSong) {
 
     switch (chosenSong) {
         default:
-            newVideo.src = "./dist/assets/songs/bamBam.mp4";
+            newVideo.src = "./dist/assets/songs/danzaKaduro.mp4";
     }
     let parentDiv = document.getElementById("theCanvas");
     parentDiv.appendChild(newVideo);
@@ -25,9 +25,9 @@ export function dibujar(canvas, eLF, chosenSong) {
     queueArrow.src = "./dist/assets/arrows/aNote.png"
 
     newVideo.onloadeddata = function () {
-        let origin = Date.now();
-        let gameClock = Date.now() - origin;
+
         newVideo.play();
+        console.log(Date.now());
         animate();
     }
     
@@ -38,10 +38,9 @@ export function dibujar(canvas, eLF, chosenSong) {
     // var currentFrame = 0;
     
     function animate() {
-        gameclock = Date.now() - gameClock;
-        console.log(gameClock);
+        let origin = Date.now();
+        console.log(Date.now() - origin);
         document.addEventListener("keydown", registerPress);
-
         let numColumns = 5;
         let numRows = 20;
         let frameWidth = stageArrow.width / numColumns;;
@@ -55,7 +54,6 @@ export function dibujar(canvas, eLF, chosenSong) {
             evt.preventDefault();
             console.log([(Date.now() - origin) / 1000, evt.key]);
         }
-
         function drawArrow(type, direction, pos = 0) {
             let arrowParams = [];
 
@@ -88,8 +86,8 @@ export function dibujar(canvas, eLF, chosenSong) {
         //timed arrow array
 
 
-        setInterval(function()
-        {
+        setInterval(function() {
+            console.log((Date.now() - origin) / 1000);
             // console.log(currentFrame);
             // Pick a new frame
             currentFrame++;
