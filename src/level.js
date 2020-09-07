@@ -12,30 +12,73 @@ export function dibujar(canvas, eLF, chosenSong) {
 
     switch (chosenSong) {
         default:
-            newVideo.src = "./dist/assets/songs/danzaKaduro.mp4";
+            newVideo.src = "./dist/assets/songs/holiday.mp4";
     }
+
     let parentDiv = document.getElementById("theCanvas");
     parentDiv.appendChild(newVideo);
     parentDiv.insertBefore(newVideo, canvas);
-
     let stageArrow = new Image();
     let queueArrow = new Image();
- 
     stageArrow.src = "./dist/assets/arrows/aStage.png";
     queueArrow.src = "./dist/assets/arrows/aNote.png"
 
     newVideo.onloadeddata = function () {
-
         newVideo.play();
         console.log(Date.now());
         animate();
     }
     
-    var shift = 0;
-    // var frameWidth = 118;
-    // var frameHeight = 118;
-    var totalFrames = 100;
-    // var currentFrame = 0;
+
+    function Particle( x, y ) {
+        this.x = x;
+        this.y = y;
+        this.coordinates = [];
+        this.coordinateCount = 7;
+        while( this.coordinateCount-- ) {
+            this.coordinates.push( [ this.x, this.y ] );
+        }
+
+        this.angle = Math.random() * Math.PI * 2;
+        this.speed = 1 + Math.random() * 9 ;
+        this.friction = 0.95;
+        this.gravity = 1;
+        this.hue = 70 + Math.random() * 100;
+        this.brightness = 50 + Math.random() * 30
+        this.alpha = 1;
+        this.decay = 0.015 + Math.random() *0.015;
+    }
+
+    Particle.prototype.update = function( index ) {
+        this.coordinates.pop();
+        this.coordinates.unshift( [ this.x, this.y ] );
+        this.speed *= this.friction;
+        this.x += Math.cos( this.angle ) * this.speed;
+        this.y += Math.sin( this.angle ) * this.speed + this.gravity;
+        this.alpha -= this.decay;
+        
+        if( this.alpha <= this.decay ) {
+            particles.splice( index, 1 );
+        }
+    }
+
+    Particle.prototype.draw = function() {
+        context.beginPath();
+        context.moveTo( this.coordinates[ this.coordinates.length - 1 ][ 0 ], 
+            this.coordinates[ this.coordinates.length - 1 ][ 1 ] );
+        context.lineTo( this.x, this.y );
+        context.strokeStyle = 'hsla(' + this.hue + ', 100%, ' 
+            + this.brightness + '%, ' + this.alpha + ')';
+        context.stroke();
+    }
+
+    function createParticles( x, y ) {
+        var particleCount = 30;
+        while( particleCount-- ) {
+            particles.push( new Particle( x, y ) );
+        }
+    }
+    let particles = [];
     
     function animate() {
         let origin = Date.now();
@@ -52,8 +95,28 @@ export function dibujar(canvas, eLF, chosenSong) {
 
         function registerPress(evt) {
             evt.preventDefault();
+
+            switch (evt.key) {
+                case "ArrowLeft":
+                    createParticles(218, 69);
+                    break;
+                case "ArrowDown":
+                    createParticles(342, 69);
+                    break;
+                case "ArrowUp":
+                    createParticles(458, 69);
+                    break;
+                case "ArrowRight":
+                    createParticles(587, 69);
+                    break;
+                default:
+                    break;
+            }
+
             console.log([(Date.now() - origin) / 1000, evt.key]);
         }
+
+
         function drawArrow(type, direction, pos = 0) {
             let arrowParams = [];
 
@@ -82,75 +145,48 @@ export function dibujar(canvas, eLF, chosenSong) {
             context.restore();
         }
 
+
+
+        
         let theQueue = new ArrowQueue(context);
         //timed arrow array
 
 
         setInterval(function() {
             console.log((Date.now() - origin) / 1000);
+
+
+            
+            
+            
+            
             // console.log(currentFrame);
             // Pick a new frame
             currentFrame++;
-
+            
             // Make the frames loop
-
-            if (currentFrame > maxFrame){
-                currentFrame = 0;
-            }
-
+            
+            if (currentFrame > maxFrame) { currentFrame = 0; }
+            
             // Update rows and columns
             column = currentFrame % numColumns;
             row = Math.floor(currentFrame / numColumns);
-
+            
             context.clearRect(0, 0, canvas.width, canvas.height);
-
-
-
+            
+            
+            
             drawArrow(stageArrow, "left");
             drawArrow(stageArrow, "down");
             drawArrow(stageArrow, "up");
             drawArrow(stageArrow, "right");
-
             
-            // context.save();
-            // context.translate(206, 69);
-            // context.rotate(Math.PI*3/2);
-            // context.translate(-59, -42);
-            // context.drawImage(
-            //     stageArrow, column * frameWidth, row * frameHeight,
-            //     frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
-            // context.restore();
-
-            // context.save();
-            // context.translate(335, 69);
-            // context.rotate(Math.PI);
-            // context.translate(-66, -59);
-            // context.drawImage(
-            //     stageArrow, column * frameWidth, row * frameHeight,
-            //     frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
-            // context.restore();
-
-            // context.save();
-            // context.translate(400, 10);
-            // context.drawImage(
-            //     stageArrow, column * frameWidth, row * frameHeight,
-            //     frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
-            // context.restore();
-
-            // context.save();
-            // context.translate(592, 69);
-            // context.rotate(Math.PI / 2);
-            // context.translate(-59, -44);
-            // context.drawImage(
-            //     stageArrow, column * frameWidth, row * frameHeight,
-            //     frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
-            // context.restore();  
+            let i = particles.length;
+            while( i-- ) {
+                particles[ i ].draw();
+                particles[ i ].update( i );
+            }
             
-            // theQueue.forEach( arrow => {
-                
-            // })
-
-
         }, 15);
 
 
