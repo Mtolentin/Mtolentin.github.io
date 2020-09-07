@@ -9,10 +9,13 @@ export function dibujar(canvas, eLF, chosenSong) {
     newVideo.controls = false;
     newVideo.width = "800";
     newVideo.height = "600";
+    let speed = 0;
 
     switch (chosenSong) {
         default:
             newVideo.src = "./dist/assets/songs/holiday.mp4";
+            speed = 15;
+            break;
     }
 
     let parentDiv = document.getElementById("theCanvas");
@@ -21,7 +24,7 @@ export function dibujar(canvas, eLF, chosenSong) {
     let stageArrow = new Image();
     let queueArrow = new Image();
     stageArrow.src = "./dist/assets/arrows/aStage.png";
-    queueArrow.src = "./dist/assets/arrows/aNote.png"
+    queueArrow.src = "./dist/assets/arrows/aNote.png";
 
     newVideo.onloadeddata = function () {
         newVideo.play();
@@ -79,8 +82,11 @@ export function dibujar(canvas, eLF, chosenSong) {
         }
     }
     let particles = [];
+    let levelQueue = [ [10, "ArrowLeft"], [15, "ArrowDown"] ];
+    
     
     function animate() {
+        let theQueue = new ArrowQueue(context);
         let origin = Date.now();
         console.log(Date.now() - origin);
         document.addEventListener("keydown", registerPress);
@@ -97,7 +103,7 @@ export function dibujar(canvas, eLF, chosenSong) {
             evt.preventDefault();
 
             switch (evt.key) {
-                case "ArrowLeft":
+                case "ArrowLeft": 
                     createParticles(218, 69);
                     break;
                 case "ArrowDown":
@@ -121,13 +127,13 @@ export function dibujar(canvas, eLF, chosenSong) {
             let arrowParams = [];
 
             switch (direction) {
-                case "left":
+                case "ArrowLeft":
                     arrowParams.push([206, 69, Math.PI * 3 / 2, -59, -42]);
                     break;
-                case "down":
+                case "ArrowDown":
                     arrowParams.push([335, 69, Math.PI, -66, -59]);
                     break;
-                case "up":
+                case "ArrowUp":
                     arrowParams.push([400, 10, 0, 0, 0]);
                     break;
                 default:
@@ -147,47 +153,39 @@ export function dibujar(canvas, eLF, chosenSong) {
 
 
 
-        
-        let theQueue = new ArrowQueue(context);
-        //timed arrow array
 
 
         setInterval(function() {
-            console.log((Date.now() - origin) / 1000);
-
-
-            
-            
-            
-            
-            // console.log(currentFrame);
-            // Pick a new frame
+            // console.log((Date.now() - origin) / 1000);
             currentFrame++;
-            
-            // Make the frames loop
-            
             if (currentFrame > maxFrame) { currentFrame = 0; }
-            
-            // Update rows and columns
             column = currentFrame % numColumns;
             row = Math.floor(currentFrame / numColumns);
-            
             context.clearRect(0, 0, canvas.width, canvas.height);
             
-            
-            
-            drawArrow(stageArrow, "left");
-            drawArrow(stageArrow, "down");
-            drawArrow(stageArrow, "up");
-            drawArrow(stageArrow, "right");
+            drawArrow(stageArrow, "ArrowLeft");
+            drawArrow(stageArrow, "ArrowDown");
+            drawArrow(stageArrow, "ArrowUp");
+            drawArrow(stageArrow, "ArrowRight");
             
             let i = particles.length;
             while( i-- ) {
                 particles[ i ].draw();
                 particles[ i ].update( i );
             }
+
+            theQueue.move();
+
+            if (Date.now() - origin >= levelQueue[0][0]) {
+                theQueue.spawn(levelQueue[0][1], speed);
+                levelQueue.shift;
+            }
+
+            theQueue.arrows.forEach( arrow => {
+                drawArrow(queueArrow, arrow.direction, arrow.pos);
+            })
             
-        }, 15);
+        }, speed);
 
 
     }

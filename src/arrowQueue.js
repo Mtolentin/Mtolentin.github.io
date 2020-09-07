@@ -1,4 +1,4 @@
-function ArrowQueue() {
+function ArrowQueue(context) {
     this.arrows = [];
 }
 
