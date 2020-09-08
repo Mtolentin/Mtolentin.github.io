@@ -1,28 +1,27 @@
 const ArrowQueue = require("./arrowQueue");
+const soldTheWorld = require("./arrowArrays/soldTheWorld");
 
 export function dibujar(canvas, eLF, chosenSong) {
     
     canvas.removeEventListener( 'click', eLF );
     let context = canvas.getContext("2d");
     let particles = [];
-    let speed = 0;
     let newVideo = document.createElement("video");
     newVideo.id = "playing";
     newVideo.controls = false;
     newVideo.width = "800";
     newVideo.height = "600";
+    let speed = 0;
+    let stageQueue = [];
 
     switch (chosenSong) {
         default:
             newVideo.src = "./dist/assets/songs/soldTheWorld.mp4";
+            stageQueue = soldTheWorld.default;
             speed = 20;
             break;
     }
-
-    let stageQueue = [ [16998, "ArrowLeft"], [17492, "ArrowLeft"],
-    [17987, "ArrowLeft"], [18471, "ArrowLeft"]
-    ];
-
+    
     stageQueue.forEach( note => {
         note[0] -= 2700;
     })

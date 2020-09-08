@@ -1,5 +1,3 @@
-// import nirvana from "./songs/nirvana";
-// import hallAndOats from "./songs/hallAndOats";
 import * as level_util from "./level";
 
 export default class EventListener_Revolution {
@@ -12,9 +10,7 @@ export default class EventListener_Revolution {
   }
   
   displayMenu(){
-    // this.ctx.fillStyle = "grey";
-    // this.ctx.fillRect(0, 0, this.dimensions.width, this.dimensions.height);
-    
+
     this.ctx.beginPath();
     this.ctx.rect(250, 350, 200, 100);
     this.ctx.fillStyle = 'green';
@@ -28,12 +24,10 @@ export default class EventListener_Revolution {
     this.ctx.fillText('Start', 300, 415);
     
     //var canvas = document.getElementById('dance-game');
+    
   }
 
-  hallAndOats(canvas, eLF){
-    level_util.dibujar(canvas, eLF);
-
-  }
+  play(canvas, eLF, chosenSong){ level_util.dibujar(canvas, eLF, chosenSong); }
   
 
 

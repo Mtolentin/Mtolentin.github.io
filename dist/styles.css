@@ -7,7 +7,7 @@ body {
     width: 800px;
     height: 600px;
     margin: 0px auto;
-    border: 1px solid cyan;
+    border: 1px solid white;
 }
 
 video {
@@ -22,6 +22,51 @@ canvas {
     z-index: 2;
 }
 
-#halted {
-    display: none;
-}
+/* HTML, BODY {
+    height: 100%;
+    }
+  
+  $colors: #360745, #D61C59, #E7D84B, #EFEAC5, #1B8798;
+  
+  BODY {
+    background: hsl(200,70,11);
+    background-size: .12em 100%;
+    font: 16em/1 Arial;
+  }
+  
+  .text--line {
+    font-size: .5em;
+    }
+  
+  svg {
+    position: absolute;
+    width: 40%;
+    height: 50%;
+    }
+  
+  $max: 5;
+  $stroke-step: 7%; 
+  .text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: $stroke-step $stroke-step * ($max - 1);
+    stroke-width: 3px;
+    
+    animation: stroke-offset 1s 1 linear;
+    
+    @for $item from 1 through $max {
+      $stroke-color: nth($colors, $item);
+      
+      &:nth-child(#{$item}) {
+        stroke: $stroke-color;
+        stroke-dashoffset: $stroke-step * $item;
+        }
+      }
+    }
+  
+  @keyframes stroke-offset {
+    0% {
+      stroke-dashoffset: $stroke-step * $max;  
+      stroke-dasharray: 0 $stroke-step * $max*2.5;
+    }
+  } */
