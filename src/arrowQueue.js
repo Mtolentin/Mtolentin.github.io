@@ -6,7 +6,7 @@ ArrowQueue.prototype.spawn = function spawn(direction, bpm) {
     let arrow = {
         direction: direction,
         pos: 600,
-        spd: bpm / 4 ,
+        spd: bpm / 4,
         combo: true
     }
     this.arrows.push(arrow);
