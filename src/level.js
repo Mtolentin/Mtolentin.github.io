@@ -18,8 +18,9 @@ export function dibujar(canvas, eLF, chosenSong) {
             break;
     }
 
-    let levelQueue = [ [16998, "ArrowLeft"], [17492, "ArrowLeft"],
-    [17987, "ArrowLeft"], [18471, "ArrowLeft"]
+    let levelQueue = [ 
+        [16998, "ArrowLeft"], [17492, "ArrowLeft"],
+        [17987, "ArrowLeft"], [18471, "ArrowLeft"]
     ];
 
     levelQueue.forEach( note => {
@@ -33,14 +34,14 @@ export function dibujar(canvas, eLF, chosenSong) {
     let queueArrow = new Image();
     stageArrow.src = "./dist/assets/arrows/aStage.png";
     queueArrow.src = "./dist/assets/arrows/aNote.png";
+    let particles = [];
+    newVideo.play();
 
-    newVideo.onloadeddata = function () {
-        newVideo.play();
+    newVideo.onplay = function () {
         console.log(Date.now());
         animate();
     }
     
-
     function Particle( x, y ) {
         this.x = x;
         this.y = y;
@@ -89,11 +90,7 @@ export function dibujar(canvas, eLF, chosenSong) {
             particles.push( new Particle( x, y ) );
         }
     }
-    let particles = [];
 
-    
-    
-    
     function animate() {
         let theQueue = new ArrowQueue(context);
         let origin = Date.now();
@@ -169,7 +166,7 @@ export function dibujar(canvas, eLF, chosenSong) {
 
 
 
-        setInterval(function() {
+        let levelLoop = setInterval(function() {
             // console.log((Date.now() - origin) / 1000);
             currentFrame++;
             if (currentFrame > maxFrame) { currentFrame = 0; }
@@ -204,6 +201,9 @@ export function dibujar(canvas, eLF, chosenSong) {
             
         }, speed);
 
+        newVideo.onended = function () {
+            clearInterval(levelLoop);
+        }
 
     }
 
