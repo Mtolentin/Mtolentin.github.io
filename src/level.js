@@ -18,6 +18,14 @@ export function dibujar(canvas, eLF, chosenSong) {
             break;
     }
 
+    let levelQueue = [ [16998, "ArrowLeft"], [17492, "ArrowLeft"],
+    [17987, "ArrowLeft"], [18471, "ArrowLeft"]
+    ];
+
+    levelQueue.forEach( note => {
+        note[0] -= 600;
+    })
+
     let parentDiv = document.getElementById("theCanvas");
     parentDiv.appendChild(newVideo);
     parentDiv.insertBefore(newVideo, canvas);
@@ -82,9 +90,8 @@ export function dibujar(canvas, eLF, chosenSong) {
         }
     }
     let particles = [];
-    let levelQueue = [ [16998, "ArrowLeft"], [17492, "ArrowLeft"],
-                       [17987, "ArrowLeft"], [18471, "ArrowLeft"]
-         ];
+
+    
     
     
     function animate() {
