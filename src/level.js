@@ -13,8 +13,8 @@ export function dibujar(canvas, eLF, chosenSong) {
 
     switch (chosenSong) {
         default:
-            newVideo.src = "./dist/assets/songs/holiday.mp4";
-            speed = 15;
+            newVideo.src = "./dist/assets/songs/bamBam.mp4";
+            speed = 20;
             break;
     }
 
@@ -82,7 +82,9 @@ export function dibujar(canvas, eLF, chosenSong) {
         }
     }
     let particles = [];
-    let levelQueue = [ [10, "ArrowLeft"], [15, "ArrowDown"] ];
+    let levelQueue = [ [16998, "ArrowLeft"], [17492, "ArrowLeft"],
+                       [17987, "ArrowLeft"], [18471, "ArrowLeft"]
+         ];
     
     
     function animate() {
@@ -129,15 +131,19 @@ export function dibujar(canvas, eLF, chosenSong) {
             switch (direction) {
                 case "ArrowLeft":
                     arrowParams.push([206, 69, Math.PI * 3 / 2, -59, -42]);
+                    arrowParams.push([pos * -1,0]);
                     break;
                 case "ArrowDown":
                     arrowParams.push([335, 69, Math.PI, -66, -59]);
+                    arrowParams.push([0,pos * -1]);
                     break;
                 case "ArrowUp":
                     arrowParams.push([400, 10, 0, 0, 0]);
+                    arrowParams.push([0,pos]);
                     break;
                 default:
                     arrowParams.push([592, 69, Math.PI / 2, -59, -44]);
+                    arrowParams.push([pos,0]);
                     break;
             }
 
@@ -147,7 +153,8 @@ export function dibujar(canvas, eLF, chosenSong) {
             context.translate(arrowParams[0][3], arrowParams[0][4]);
             context.drawImage(
                 type, column * frameWidth, row * frameHeight,
-                frameWidth, frameHeight, 0, pos, frameWidth, frameHeight);
+                frameWidth, frameHeight, arrowParams[1][0], arrowParams[1][1], 
+                frameWidth, frameHeight);
             context.restore();
         }
 
@@ -173,17 +180,20 @@ export function dibujar(canvas, eLF, chosenSong) {
                 particles[ i ].draw();
                 particles[ i ].update( i );
             }
-
-            theQueue.move();
-
-            if (Date.now() - origin >= levelQueue[0][0]) {
-                theQueue.spawn(levelQueue[0][1], speed);
-                levelQueue.shift;
+            // debugger
+            theQueue.move(context);
+            if (levelQueue[0]) {
+                if (Date.now() - origin >= levelQueue[0][0]) {
+                    theQueue.spawn(levelQueue[0][1], speed);
+                    levelQueue.shift();
+                }
             }
 
-            theQueue.arrows.forEach( arrow => {
-                drawArrow(queueArrow, arrow.direction, arrow.pos);
-            })
+            if (theQueue.arrows[0]) {
+                theQueue.arrows.forEach( arrow => {
+                    drawArrow(queueArrow, arrow.direction, arrow.pos);
+                })
+            }  
             
         }, speed);
 
