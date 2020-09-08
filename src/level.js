@@ -1,30 +1,30 @@
 const ArrowQueue = require("./arrowQueue");
 
 export function dibujar(canvas, eLF, chosenSong) {
-
+    
     canvas.removeEventListener( 'click', eLF );
     let context = canvas.getContext("2d");
+    let particles = [];
+    let speed = 0;
     let newVideo = document.createElement("video");
     newVideo.id = "playing";
     newVideo.controls = false;
     newVideo.width = "800";
     newVideo.height = "600";
-    let speed = 0;
 
     switch (chosenSong) {
         default:
-            newVideo.src = "./dist/assets/songs/bamBam.mp4";
+            newVideo.src = "./dist/assets/songs/soldTheWorld.mp4";
             speed = 20;
             break;
     }
 
-    let levelQueue = [ 
-        [16998, "ArrowLeft"], [17492, "ArrowLeft"],
-        [17987, "ArrowLeft"], [18471, "ArrowLeft"]
+    let stageQueue = [ [16998, "ArrowLeft"], [17492, "ArrowLeft"],
+    [17987, "ArrowLeft"], [18471, "ArrowLeft"]
     ];
 
-    levelQueue.forEach( note => {
-        note[0] -= 600;
+    stageQueue.forEach( note => {
+        note[0] -= 2700;
     })
 
     let parentDiv = document.getElementById("theCanvas");
@@ -34,14 +34,10 @@ export function dibujar(canvas, eLF, chosenSong) {
     let queueArrow = new Image();
     stageArrow.src = "./dist/assets/arrows/aStage.png";
     queueArrow.src = "./dist/assets/arrows/aNote.png";
-    let particles = [];
-    newVideo.play();
 
-    newVideo.onplay = function () {
-        console.log(Date.now());
-        animate();
-    }
+    newVideo.play();
     
+
     function Particle( x, y ) {
         this.x = x;
         this.y = y;
@@ -91,6 +87,11 @@ export function dibujar(canvas, eLF, chosenSong) {
         }
     }
 
+    newVideo.onplaying = function () {
+        console.log(Date.now());
+        animate();
+    }    
+    
     function animate() {
         let theQueue = new ArrowQueue(context);
         let origin = Date.now();
@@ -166,7 +167,7 @@ export function dibujar(canvas, eLF, chosenSong) {
 
 
 
-        let levelLoop = setInterval(function() {
+        let stageLoop = setInterval(function() {
             // console.log((Date.now() - origin) / 1000);
             currentFrame++;
             if (currentFrame > maxFrame) { currentFrame = 0; }
@@ -186,10 +187,10 @@ export function dibujar(canvas, eLF, chosenSong) {
             }
             // debugger
             theQueue.move(context);
-            if (levelQueue[0]) {
-                if (Date.now() - origin >= levelQueue[0][0]) {
-                    theQueue.spawn(levelQueue[0][1], speed);
-                    levelQueue.shift();
+            if (stageQueue[0]) {
+                if (Date.now() - origin >= stageQueue[0][0]) {
+                    theQueue.spawn(stageQueue[0][1], speed);
+                    stageQueue.shift();
                 }
             }
 
@@ -202,7 +203,7 @@ export function dibujar(canvas, eLF, chosenSong) {
         }, speed);
 
         newVideo.onended = function () {
-            clearInterval(levelLoop);
+            clearInterval(stageLoop);
         }
 
     }
