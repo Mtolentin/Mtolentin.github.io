@@ -24,11 +24,9 @@ export default class EventListener_Revolution {
     this.ctx.fillText('Start', 300, 415);
     
     //var canvas = document.getElementById('dance-game');
-    
+
   }
 
   play(canvas, eLF, chosenSong){ level_util.dibujar(canvas, eLF, chosenSong); }
   
-
-
 }
