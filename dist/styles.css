@@ -1,5 +1,5 @@
 body {
-    background: darkslategray;
+    background: black;
 }
 
 /* Centering the canvas element  */
@@ -7,7 +7,6 @@ body {
     width: 800px;
     height: 600px;
     margin: 0px auto;
-    border: 1px solid white;
 }
 
 video {

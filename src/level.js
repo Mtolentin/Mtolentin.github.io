@@ -21,7 +21,7 @@ export function dibujar(canvas, eLF, chosenSong) {
             speed = 20;
             break;
     }
-    
+
     stageQueue.forEach( note => {
         note[0] -= 2700;
     })
@@ -129,42 +129,43 @@ export function dibujar(canvas, eLF, chosenSong) {
         }
 
 
-        function drawArrow(type, direction, pos = 0) {
-            let arrowParams = [];
+        function drawGameObject(type, direction, pos = 0) {
+            if (type === "stageArrow" || "queueArrow") {
+                let arrowParams = [];
 
-            switch (direction) {
-                case "ArrowLeft":
-                    arrowParams.push([206, 69, Math.PI * 3 / 2, -59, -42]);
-                    arrowParams.push([pos * -1,0]);
-                    break;
-                case "ArrowDown":
-                    arrowParams.push([335, 69, Math.PI, -66, -59]);
-                    arrowParams.push([0,pos * -1]);
-                    break;
-                case "ArrowUp":
-                    arrowParams.push([400, 10, 0, 0, 0]);
-                    arrowParams.push([0,pos]);
-                    break;
-                default:
-                    arrowParams.push([592, 69, Math.PI / 2, -59, -44]);
-                    arrowParams.push([pos,0]);
-                    break;
+                switch (direction) {
+                    case "ArrowLeft":
+                        arrowParams.push([206, 69, Math.PI * 3 / 2, -59, -42]);
+                        arrowParams.push([pos * -1,0]);
+                        break;
+                    case "ArrowDown":
+                        arrowParams.push([335, 69, Math.PI, -66, -59]);
+                        arrowParams.push([0,pos * -1]);
+                        break;
+                    case "ArrowUp":
+                        arrowParams.push([400, 10, 0, 0, 0]);
+                        arrowParams.push([0,pos]);
+                        break;
+                    case "ArrowRight":
+                        arrowParams.push([592, 69, Math.PI / 2, -59, -44]);
+                        arrowParams.push([pos,0]);
+                        break;
+                    default:
+                }
+
+                context.save();
+                context.translate(arrowParams[0][0], arrowParams[0][1]);
+                context.rotate(arrowParams[0][2]);
+                context.translate(arrowParams[0][3], arrowParams[0][4]);
+                context.drawImage(
+                    type, column * frameWidth, row * frameHeight,
+                    frameWidth, frameHeight, arrowParams[1][0], arrowParams[1][1], 
+                    frameWidth, frameHeight);
+                context.restore();
+            } else {
+
             }
-
-            context.save();
-            context.translate(arrowParams[0][0], arrowParams[0][1]);
-            context.rotate(arrowParams[0][2]);
-            context.translate(arrowParams[0][3], arrowParams[0][4]);
-            context.drawImage(
-                type, column * frameWidth, row * frameHeight,
-                frameWidth, frameHeight, arrowParams[1][0], arrowParams[1][1], 
-                frameWidth, frameHeight);
-            context.restore();
         }
-
-
-
-
 
         let stageLoop = setInterval(function() {
             // console.log((Date.now() - origin) / 1000);
@@ -174,15 +175,15 @@ export function dibujar(canvas, eLF, chosenSong) {
             row = Math.floor(currentFrame / numColumns);
             context.clearRect(0, 0, canvas.width, canvas.height);
             
-            drawArrow(stageArrow, "ArrowLeft");
-            drawArrow(stageArrow, "ArrowDown");
-            drawArrow(stageArrow, "ArrowUp");
-            drawArrow(stageArrow, "ArrowRight");
+            drawGameObject(stageArrow, "ArrowLeft");
+            drawGameObject(stageArrow, "ArrowDown");
+            drawGameObject(stageArrow, "ArrowUp");
+            drawGameObject(stageArrow, "ArrowRight");
             
             let i = particles.length;
             while( i-- ) {
-                particles[ i ].draw();
-                particles[ i ].update( i );
+                particles[i].draw();
+                particles[i].update( i );
             }
             // debugger
             theQueue.move(context);
@@ -195,7 +196,7 @@ export function dibujar(canvas, eLF, chosenSong) {
 
             if (theQueue.arrows[0]) {
                 theQueue.arrows.forEach( arrow => {
-                    drawArrow(queueArrow, arrow.direction, arrow.pos);
+                    drawGameObject(queueArrow, arrow.direction, arrow.pos);
                 })
             }  
             
