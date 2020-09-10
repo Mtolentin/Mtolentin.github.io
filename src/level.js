@@ -9,6 +9,7 @@ export function dibujar(canvas, eLF, chosenSong) {
     let newVideo = document.createElement("video");
     newVideo.id = "playing";
     newVideo.controls = false;
+    newVideo.muted = false;
     newVideo.width = "800";
     newVideo.height = "600";
     let speed = 0;
@@ -16,7 +17,7 @@ export function dibujar(canvas, eLF, chosenSong) {
 
     switch (chosenSong) {
         default:
-            newVideo.src = "./dist/assets/songs/soldTheWorld.mp4";
+            newVideo.src = "./dist/assets/songs/hallAndOats.mp4";
             stageQueue = soldTheWorld.default;
             speed = 20;
             break;

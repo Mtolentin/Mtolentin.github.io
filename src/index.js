@@ -1,6 +1,8 @@
 import EventListener_Revolution from './game';
 
+let parentDiv = document.getElementById("theCanvas");
 const canvas = document.getElementById('dance-game');
+
 
 
 function initButtonTest(evt) {
@@ -31,6 +33,7 @@ function initButtonTest(evt) {
         }
     }
 }
+
 
 let game = new EventListener_Revolution(canvas);
 canvas.addEventListener( 'click' , initButtonTest);
