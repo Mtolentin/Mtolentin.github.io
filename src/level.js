@@ -32,8 +32,8 @@ export function dibujar(canvas, eLF, chosenSong) {
     parentDiv.insertBefore(newVideo, canvas);
     let stageArrow = new Image();
     let queueArrow = new Image();
-    stageArrow.src = "./dist/assets/arrows/aStage.png";
-    queueArrow.src = "./dist/assets/arrows/aNote.png";
+    stageArrow.src = "./dist/assets/gui/arrows/aStage.png";
+    queueArrow.src = "./dist/assets/gui/arrows/aNote.png";
 
     newVideo.play();
     
