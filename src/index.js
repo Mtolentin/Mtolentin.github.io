@@ -1,7 +1,6 @@
 import EventListener_Revolution from './game';
 
 let parentDiv = document.getElementById("theCanvas");
-const canvas = document.getElementById('dance-game');
 
 let fXSelect = document.createElement("audio");
 fXSelect.id = "fXSelect";
@@ -21,7 +20,8 @@ let introText2 = document.createElement("div");
 introText2.id = "theIntro2";
 introText2.innerText = "click to begin";
 
-let game = new EventListener_Revolution(canvas);
+// const canvas = document.getElementById('dance-game');
+// let game = new EventListener_Revolution(canvas);
 
 setTimeout(function () { 
     parentDiv.appendChild(introText1);
