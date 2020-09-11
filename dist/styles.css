@@ -25,8 +25,9 @@ video {
 }
 
 canvas {
-    position: inherit;
+    position: absolute;
     z-index: 5;
+    margin: 0px auto;
 }
 
 #theIntro1 {
@@ -63,7 +64,7 @@ canvas {
 
 @keyframes intro2 {
   0%   { color:black; }
-  50%  { color:white; }
+  50%  { color:lightyellow; }
   100% { color:black; }
 }
 
@@ -115,23 +116,27 @@ canvas {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     top: 300px;
+    overflow: visible;
+    white-space: nowrap;
 }
 
 #trackNirvana{ animation-name: aniNirvana; }
 
 @keyframes aniNirvana {
-    0%   { left: 100%  }
-    100% { left: 10px }
+    0%   { left: 100%;  }
+    100% { left: -40px; }
 }
 
+#trackDanzaKaduro{ animation-name: aniDanzaKaduro; }
 
-
-
-
-#trackDanzaKaduro{
-
+@keyframes aniDanzaKaduro {
+    0%   { left: 100%;  }
+    100% { left: -240px; }
 }
 
-#trackCebuana{
+#trackCebuana{ animation-name: aniCebuana; }
 
+@keyframes aniCebuana {
+    0%   { left: 100%; top: 185px  }
+    100% { left: 320px; top: 185px }   
 }

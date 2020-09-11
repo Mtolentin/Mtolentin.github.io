@@ -81,7 +81,14 @@ function displaySongList() {
     cebuana.id = "trackCebuana";
 
     parentDiv.appendChild(nirvana);
-    parentDiv.insertBefore(nirvana, canvas);
+
+    setTimeout( function() {
+        parentDiv.appendChild(danzaKaduro);
+    }, 4000);
+
+    setTimeout( function() {
+        parentDiv.appendChild(cebuana);
+    }, 8000);
 
 }
 
