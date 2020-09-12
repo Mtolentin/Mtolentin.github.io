@@ -1,16 +1,13 @@
 import EventListener_Revolution from './game';
+import displaySongList_v1 from './songList_v1';
 
-let parentDiv = document.getElementById("theCanvas");
+let parentDiv = document.getElementById("gameScreen");
 
 let fXSelect = document.createElement("audio");
 fXSelect.id = "fXSelect";
 fXSelect.src = "./dist/assets/sounds/select.ogg";
-fXSelect.load();
 parentDiv.appendChild(fXSelect);
-parentDiv.insertBefore(fXSelect, canvas);
-fXSelect.addEventListener("ended", function () {
-    fXSelect.load();
-});
+fXSelect.addEventListener("ended", function () { fXSelect.load(); });
 
 let introText1 = document.createElement("div");
 introText1.id = "theIntro1";
@@ -20,36 +17,26 @@ let introText2 = document.createElement("div");
 introText2.id = "theIntro2";
 introText2.innerText = "click to begin";
 
-// const canvas = document.getElementById('dance-game');
-// let game = new EventListener_Revolution(canvas);
 
-setTimeout(function () { 
-    parentDiv.appendChild(introText1);
-    parentDiv.insertBefore(introText1, canvas);
-}, 1500);
-
-setTimeout(function () {
-    let initialClick = canvas.addEventListener('click', goToSongList);
-    parentDiv.appendChild(introText2);
-    parentDiv.insertBefore(introText2, canvas);
-}, 4500);
+setTimeout(function () { parentDiv.appendChild(introText1); }, 1500);
+setTimeout(function () { parentDiv.appendChild(introText2); }, 4500);
+parentDiv.addEventListener('click', goToSongList);
 
 function goToSongList(evt) {
+    parentDiv.removeEventListener('click', goToSongList);
     fXSelect.play();
     screenFade();
     setTimeout( function() {
+        playSelectMusic();
         introText1.remove();
         introText2.remove();
         let bgSongList = document.createElement("img");
         bgSongList.id = "menuBackground"
         bgSongList.src = "./dist/assets/gui/bg.png";
-        bgSongList.alt = "Error loading SongList background";
         parentDiv.appendChild(bgSongList);
-        parentDiv.insertBefore(bgSongList, canvas);
-        let loadSongs = bgSongList.addEventListener("animationend", function() {
-            document.getElementById("fader").remove();
-            displaySongList();
-        });    
+        bgSongList.addEventListener(
+            "animationend", displaySongList_v1(parentDiv)
+        );        
     }, 2000);
 }
 
@@ -57,40 +44,16 @@ function screenFade() {
     let bgFade = document.createElement("div");
     bgFade.id = "fader";
     parentDiv.appendChild(bgFade);
-    parentDiv.insertBefore(bgFade, canvas);
 }
 
-function displaySongList() {
-
-    let nirvana = document.createElement("img");
-    let danzaKaduro = document.createElement("img");
-    let cebuana = document.createElement("img");
-
-
-
-    nirvana.src = "./dist/assets/gui/banners/nirvana.png";
-    danzaKaduro.src = "./dist/assets/gui/banners/danzaKaduro.png";
-    cebuana.src = "./dist/assets/gui/banners/bamBamBam.png";
-
-    nirvana.className= "trackImg";
-    danzaKaduro.className = "trackImg";
-    cebuana.className = "trackImg";
-
-    nirvana.id= "trackNirvana";
-    danzaKaduro.id = "trackDanzaKaduro";
-    cebuana.id = "trackCebuana";
-
-    parentDiv.appendChild(nirvana);
-
-    setTimeout( function() {
-        parentDiv.appendChild(danzaKaduro);
-    }, 4000);
-
-    setTimeout( function() {
-        parentDiv.appendChild(cebuana);
-    }, 8000);
-
+function playSelectMusic() {
+    let fXSelectMusic = document.createElement("audio");
+    fXSelectMusic.id = "fXSelectMusic";
+    fXSelectMusic.src = "./dist/assets/sounds/selectMusic.ogg";
+    parentDiv.appendChild(fXSelectMusic);
+    fXSelectMusic.play();
 }
+
 
 
 

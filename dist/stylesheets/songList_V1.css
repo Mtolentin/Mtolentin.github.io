@@ -1,0 +1,36 @@
+.trackImg{
+    position: relative;
+    transform: rotate(-61deg);
+    width: 351px;
+    height: 137px;
+    object-fit: cover;
+    overflow: hidden;
+    z-index: 4;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    top: 300px;
+    overflow: visible;
+    white-space: nowrap;
+}
+
+#trackNirvana{ animation-name: aniNirvana; }
+
+@keyframes aniNirvana {
+    0%   { left: 100%; top: 297px; }
+    100% { left: 0px; top:297px; }
+}
+
+#trackDanzaKaduro{ animation-name: aniDanzaKaduro; }
+
+@keyframes aniDanzaKaduro {
+    0%   { left: 100%;  }
+    100% { left: -139px; }
+}
+
+#trackCebuana{ animation-name: aniCebuana; object-position: 0px -18px; }
+
+@keyframes aniCebuana {
+    0%   { left: 100%; top: 166px  }
+    100% { left: 429px; top: 166px }   
+}

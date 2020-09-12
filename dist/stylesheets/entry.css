@@ -10,8 +10,8 @@ body {
     100% { background-color:black; }
 }
 
-/* Centering the canvas element  */
-#theCanvas {
+/* Centering the main element  */
+#gameScreen {
     width: 800px;
     height: 600px;
     margin: 0px auto;
@@ -70,7 +70,7 @@ canvas {
 
 @font-face {
   font-family: righteous;
-  src: url(./assets/gui/righteous.ttf);
+  src: url(../assets/gui/righteous.ttf);
 }
 
 #fader {
@@ -102,41 +102,4 @@ canvas {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     z-index: 3;
-}
-
-.trackImg{
-    position: relative;
-    transform: rotate(-50deg);
-    width: 381px;
-    height: 116px;
-    object-fit: contain;
-    overflow: hidden;
-    z-index: 4;
-    animation-duration: 0.5s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-    top: 300px;
-    overflow: visible;
-    white-space: nowrap;
-}
-
-#trackNirvana{ animation-name: aniNirvana; }
-
-@keyframes aniNirvana {
-    0%   { left: 100%;  }
-    100% { left: -40px; }
-}
-
-#trackDanzaKaduro{ animation-name: aniDanzaKaduro; }
-
-@keyframes aniDanzaKaduro {
-    0%   { left: 100%;  }
-    100% { left: -240px; }
-}
-
-#trackCebuana{ animation-name: aniCebuana; }
-
-@keyframes aniCebuana {
-    0%   { left: 100%; top: 185px  }
-    100% { left: 320px; top: 185px }   
 }
