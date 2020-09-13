@@ -53,7 +53,7 @@ export function dibujar(canvas, eLF, chosenSong) {
         this.hue = 70 + Math.random() * 100;
         this.brightness = 50 + Math.random() * 30
         this.alpha = 1;
-        this.decay = 0.015 + Math.random() *0.015;
+        this.decay = 0.015 + Math.random() * 0.015;
     }
 
     Particle.prototype.update = function( index ) {

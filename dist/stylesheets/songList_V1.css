@@ -14,6 +14,19 @@
     white-space: nowrap;
 }
 
+.trackSelectable:hover {
+    animation-name: trackStrobe;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: backwards;
+}
+
+@keyframes trackStrobe {
+    0%   { opacity: 1;   }
+    50%  { opacity: 1.5; }
+    100% { opacity: 1;   }
+}
+
 #trackNirvana{ animation-name: aniNirvana; }
 
 @keyframes aniNirvana {

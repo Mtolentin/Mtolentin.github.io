@@ -19,12 +19,11 @@ introText2.innerText = "click to begin";
 
 setTimeout(function () { parentDiv.appendChild(introText1); }, 1500);
 setTimeout(function () { parentDiv.appendChild(introText2); }, 4500);
-parentDiv.addEventListener('click', goToSongList);
+parentDiv.addEventListener('click', goToSongList, {once: true});
 
 
 
 function goToSongList(evt) {
-    parentDiv.removeEventListener('click', goToSongList);
     fXSelect.play();
     screenFade();
     setTimeout( function() {
@@ -35,8 +34,8 @@ function goToSongList(evt) {
         bgSongList.id = "menuBackground"
         bgSongList.src = "./dist/assets/gui/bg.png";
         parentDiv.appendChild(bgSongList);
-        bgSongList.addEventListener(
-            "animationend", displaySongList_v1(parentDiv)
+        bgSongList
+            .addEventListener("animationend", displaySongList_v1(parentDiv), {once: true}
         );        
     }, 2000);
 }
