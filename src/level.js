@@ -7,8 +7,7 @@ export function dibujar(canvas, eLF, chosenSong) {
     let context = canvas.getContext("2d");
     let particles = [];
     let newVideo = document.createElement("video");
-    newVideo.id = "playing";
-    newVideo.controls = false;
+    newVideo.id = "playing"; newVideo.controls = false;
     newVideo.muted = false;
     newVideo.width = "800";
     newVideo.height = "600";
@@ -64,10 +63,7 @@ export function dibujar(canvas, eLF, chosenSong) {
         this.x += Math.cos( this.angle ) * this.speed;
         this.y += Math.sin( this.angle ) * this.speed + this.gravity;
         this.alpha -= this.decay;
-        
-        if( this.alpha <= this.decay ) {
-            particles.splice( index, 1 );
-        }
+        if( this.alpha <= this.decay ) { particles.splice( index, 1 ); }
     }
 
     Particle.prototype.draw = function() {
@@ -82,15 +78,14 @@ export function dibujar(canvas, eLF, chosenSong) {
 
     function createParticles( x, y ) {
         var particleCount = 30;
-        while( particleCount-- ) {
-            particles.push( new Particle( x, y ) );
+        while( particleCount-- ) { 
+            particles.push( 
+                new Particle( x, y ) 
+            ); 
         }
     }
 
-    newVideo.onplaying = function () {
-        console.log(Date.now());
-        animate();
-    }    
+    newVideo.onplaying = function () { console.log(Date.now()); animate(); }    
     
     function animate() {
         let theQueue = new ArrowQueue(context);
@@ -108,24 +103,13 @@ export function dibujar(canvas, eLF, chosenSong) {
 
         function registerPress(evt) {
             evt.preventDefault();
-
             switch (evt.key) {
-                case "ArrowLeft": 
-                    createParticles(218, 69);
-                    break;
-                case "ArrowDown":
-                    createParticles(342, 69);
-                    break;
-                case "ArrowUp":
-                    createParticles(458, 69);
-                    break;
-                case "ArrowRight":
-                    createParticles(587, 69);
-                    break;
-                default:
-                    break;
+                case "ArrowLeft": createParticles(218, 69); break;
+                case "ArrowDown": createParticles(342, 69); break;
+                case "ArrowUp": createParticles(458, 69); break;
+                case "ArrowRight": createParticles(587, 69); break;
+                default: break;
             }
-
             console.log([(Date.now() - origin) / 1000, evt.key]);
         }
 
@@ -182,10 +166,7 @@ export function dibujar(canvas, eLF, chosenSong) {
             drawGameObject(stageArrow, "ArrowRight");
             
             let i = particles.length;
-            while( i-- ) {
-                particles[i].draw();
-                particles[i].update( i );
-            }
+            while( i-- ) { particles[i].draw(); particles[i].update( i ); }
             // debugger
             theQueue.move(context);
             if (stageQueue[0]) {
@@ -203,9 +184,7 @@ export function dibujar(canvas, eLF, chosenSong) {
             
         }, speed);
 
-        newVideo.onended = function () {
-            clearInterval(stageLoop);
-        }
+        newVideo.onended = function () { clearInterval(stageLoop); }
 
     }
 

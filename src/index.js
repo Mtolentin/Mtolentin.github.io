@@ -17,10 +17,11 @@ let introText2 = document.createElement("div");
 introText2.id = "theIntro2";
 introText2.innerText = "click to begin";
 
-
 setTimeout(function () { parentDiv.appendChild(introText1); }, 1500);
 setTimeout(function () { parentDiv.appendChild(introText2); }, 4500);
 parentDiv.addEventListener('click', goToSongList);
+
+
 
 function goToSongList(evt) {
     parentDiv.removeEventListener('click', goToSongList);
@@ -53,13 +54,6 @@ function playSelectMusic() {
     parentDiv.appendChild(fXSelectMusic);
     fXSelectMusic.play();
 }
-
-
-
-
-
-
-
 
 
 
