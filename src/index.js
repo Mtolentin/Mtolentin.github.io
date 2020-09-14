@@ -1,12 +1,13 @@
-import EventListener_Revolution from './game';
+import * as game_util from './game_util';
 import displaySongList_v1 from './songList_v1';
+import dibujar from './level';
 
 let parentDiv = document.getElementById("gameScreen");
 
 let fXSelect = document.createElement("audio");
 fXSelect.id = "fXSelect";
 fXSelect.src = "./dist/assets/sounds/select.ogg";
-parentDiv.appendChild(fXSelect);
+document.getElementById("audioChannel").appendChild(fXSelect);
 fXSelect.addEventListener("ended", function () { fXSelect.load(); });
 
 let introText1 = document.createElement("div");
@@ -19,42 +20,37 @@ introText2.innerText = "click to begin";
 
 setTimeout(function () { parentDiv.appendChild(introText1); }, 1500);
 setTimeout(function () { parentDiv.appendChild(introText2); }, 4500);
-parentDiv.addEventListener('click', goToSongList, {once: true});
+parentDiv.addEventListener('click', loadMenu, {once: true} );
 
+let trackList = [];
 
-
-function goToSongList(evt) {
+function loadMenu(evt) {
     fXSelect.play();
-    screenFade();
+    game_util.screenFade();
     setTimeout( function() {
-        playSelectMusic();
-        introText1.remove();
-        introText2.remove();
+        if (introText1) {
+            introText1.remove();
+            introText2.remove();
+        }
+        game_util.playSelectMusic();
         let bgSongList = document.createElement("img");
         bgSongList.id = "menuBackground"
         bgSongList.src = "./dist/assets/gui/bg.png";
         parentDiv.appendChild(bgSongList);
-        bgSongList
-            .addEventListener("animationend", displaySongList_v1(parentDiv), {once: true}
-        );        
+        bgSongList.addEventListener( "animationend", () => {
+            trackList = displaySongList_v1(parentDiv)}, {once: true} 
+        );      
     }, 2000);
+
+    trackList.forEach( (track) => {
+        track.onclick = function () { beginStage(track.id) };
+    })
+
+    function beginStage(chosenSong) {
+        trackList.forEach( (track) => { track.remove(); })
+        dibujar(chosenSong);
+    }
 }
-
-function screenFade() {
-    let bgFade = document.createElement("div");
-    bgFade.id = "fader";
-    parentDiv.appendChild(bgFade);
-}
-
-function playSelectMusic() {
-    let fXSelectMusic = document.createElement("audio");
-    fXSelectMusic.id = "fXSelectMusic";
-    fXSelectMusic.src = "./dist/assets/sounds/selectMusic.ogg";
-    parentDiv.appendChild(fXSelectMusic);
-    fXSelectMusic.play();
-}
-
-
 
 // Testing Codes
 

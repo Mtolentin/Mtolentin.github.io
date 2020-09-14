@@ -14,6 +14,24 @@
     white-space: nowrap;
 }
 
+.trackImg #trackNirvana{ animation-name: aniNirvana; }
+@keyframes aniNirvana {
+    0%   { left: 100%; top: 297px; }
+    100% { left: 0px; top:297px; }
+}
+
+.trackImg #trackDanzaKaduro{ animation-name: aniDanzaKaduro; }
+@keyframes aniDanzaKaduro {
+    0%   { left: 100%;  }
+    100% { left: -139px; }
+}
+
+.trackImg #trackCebuana{ animation-name: aniCebuana; object-position: 0px -18px; }
+@keyframes aniCebuana {
+    0%   { left: 100%; top: 166px  }
+    100% { left: 429px; top: 166px }   
+}
+
 .trackSelectable:hover {
     animation-name: trackStrobe;
     animation-duration: 0.5s;
@@ -25,25 +43,4 @@
     0%   { opacity: 1;   }
     50%  { opacity: 1.5; }
     100% { opacity: 1;   }
-}
-
-#trackNirvana{ animation-name: aniNirvana; }
-
-@keyframes aniNirvana {
-    0%   { left: 100%; top: 297px; }
-    100% { left: 0px; top:297px; }
-}
-
-#trackDanzaKaduro{ animation-name: aniDanzaKaduro; }
-
-@keyframes aniDanzaKaduro {
-    0%   { left: 100%;  }
-    100% { left: -139px; }
-}
-
-#trackCebuana{ animation-name: aniCebuana; object-position: 0px -18px; }
-
-@keyframes aniCebuana {
-    0%   { left: 100%; top: 166px  }
-    100% { left: 429px; top: 166px }   
 }

@@ -1,14 +1,10 @@
 export default function displaySongList_v1(parentDiv) {
 
     document.getElementById("fader").remove();
-    document.getElementById("menuBackground")
-        .removeEventListener('click', displaySongList_v1
-    );
-
     let fXClick = document.createElement("audio");
     fXClick.id = "fXClick";
     fXClick.src = "./dist/assets/sounds/click.ogg";
-    parentDiv.appendChild(fXClick);
+    document.getElementById("audioChannel").appendChild(fXClick);
 
     let menuTitle = document.createElement("div");
     menuTitle.id = "txtSelectMusic";
@@ -20,19 +16,26 @@ export default function displaySongList_v1(parentDiv) {
     subTxt.innerText = "Hover to preview and click to begin!";
     parentDiv.appendChild(subTxt);
 
-    createTrack("nirvana", "trackNirvana", 0);
-    createTrack("danzaKaduro", "trackDanzaKaduro", 1500);
-    createTrack("cebuana, trackCebuana", 3000);
+    let trackList = [];
+    trackList.push(createTrack("nirvana", "trackNirvana"));
+    setTimeout( () => {
+        trackList.push(createTrack("danzaKaduro", "trackDanzaKaduro"));
+    }, 1500);
+    setTimeout( () => {
+        trackList.push(createTrack("cebuana", "trackCebuana"));
+    }, 3000);    
 
-    function createTrack(tSrc, tID, tDelay) {
-        let newTrack = document.createElement("div");
+    function createTrack(tSrc, tID) {
+        let newTrack = document.createElement("img");
         newTrack.src = "./dist/assets/gui/banners/" + tSrc + ".png";
+        newTrack.className = "trackImg";
         newTrack.id = tID;
-        setTimeout(function () { parentDiv.appendChild(newTrack); }, tDelay);
-        newTrack.onclick = function () {dibujar(tSrc)};
-        return newTrack;
+        parentDiv.appendChild(newTrack);
+        parentDiv.insertBefore(newTrack, menuTitle);
+        this.beginStage.bind(this);
     }
 
+    return trackList;
 }
 
 
