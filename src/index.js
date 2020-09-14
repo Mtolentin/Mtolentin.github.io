@@ -1,6 +1,5 @@
 import * as game_util from './game_util';
 import displaySongList_v1 from './songList_v1';
-import dibujar from './level';
 
 let parentDiv = document.getElementById("gameScreen");
 
@@ -22,35 +21,34 @@ setTimeout(function () { parentDiv.appendChild(introText1); }, 1500);
 setTimeout(function () { parentDiv.appendChild(introText2); }, 4500);
 parentDiv.addEventListener('click', loadMenu, {once: true} );
 
-let trackList = [];
 
-function loadMenu(evt) {
+function loadMenu(evt = null) {
     fXSelect.play();
     game_util.screenFade();
     setTimeout( function() {
-        if (introText1) {
-            introText1.remove();
-            introText2.remove();
-        }
+        if (introText1) { introText1.remove(); }
+        if (introText2) { introText2.remove(); }
         game_util.playSelectMusic();
         let bgSongList = document.createElement("img");
         bgSongList.id = "menuBackground"
         bgSongList.src = "./dist/assets/gui/bg.png";
         parentDiv.appendChild(bgSongList);
         bgSongList.addEventListener( "animationend", () => {
-            trackList = displaySongList_v1(parentDiv)}, {once: true} 
-        );      
+            displaySongList_v1(parentDiv)}, {once: true} 
+        );
+
     }, 2000);
 
-    trackList.forEach( (track) => {
-        track.onclick = function () { beginStage(track.id) };
-    })
-
-    function beginStage(chosenSong) {
-        trackList.forEach( (track) => { track.remove(); })
-        dibujar(chosenSong);
-    }
 }
+
+
+    // setTimeout(() => {
+    //     trackList.forEach((track) => {
+    //         debugger
+    //         track.className = "trackSelectable";
+    //     });
+    // })
+
 
 // Testing Codes
 

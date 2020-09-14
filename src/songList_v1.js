@@ -1,15 +1,19 @@
+import dibujar from './level';
+
 export default function displaySongList_v1(parentDiv) {
 
     document.getElementById("fader").remove();
+    
+    let menuTitle = document.createElement("div");
+    menuTitle.id = "txtSelectMusic";
+    menuTitle.innerText = "Select Music";
+    parentDiv.appendChild(menuTitle);
+
     let fXClick = document.createElement("audio");
     fXClick.id = "fXClick";
     fXClick.src = "./dist/assets/sounds/click.ogg";
     document.getElementById("audioChannel").appendChild(fXClick);
 
-    let menuTitle = document.createElement("div");
-    menuTitle.id = "txtSelectMusic";
-    menuTitle.innerText = "Select Music";
-    parentDiv.appendChild(menuTitle);
     
     let subTxt = document.createElement("div");
     subTxt.id = "txtSubTxt";
@@ -17,25 +21,41 @@ export default function displaySongList_v1(parentDiv) {
     parentDiv.appendChild(subTxt);
 
     let trackList = [];
-    trackList.push(createTrack("nirvana", "trackNirvana"));
+    setTimeout( () => {
+        trackList.push(createTrack("nirvana", "trackNirvana"));
+    }, 750);
+
     setTimeout( () => {
         trackList.push(createTrack("danzaKaduro", "trackDanzaKaduro"));
     }, 1500);
+
     setTimeout( () => {
         trackList.push(createTrack("cebuana", "trackCebuana"));
-    }, 3000);    
-
+        // debugger
+        trackList[trackList.length - 1].addEventListener("animationend", 
+            makeSelection(), {once: true});
+    }, 2250);
+    
     function createTrack(tSrc, tID) {
         let newTrack = document.createElement("img");
         newTrack.src = "./dist/assets/gui/banners/" + tSrc + ".png";
         newTrack.className = "trackImg";
         newTrack.id = tID;
         parentDiv.appendChild(newTrack);
-        parentDiv.insertBefore(newTrack, menuTitle);
-        this.beginStage.bind(this);
+        // parentDiv.insertBefore(newTrack, menuTitle);
+        return newTrack;
     }
 
-    return trackList;
+    function makeSelection() {
+        console.log("ready");
+        setTimeout( () => {
+            subTxt.style.animationName = "intro4";
+            trackList.forEach( (track) => {
+                track.classList.remove("trackImg");
+                track.className = "trackSelectable";
+            })
+        }, 750);
+    }
 }
 
 
@@ -59,5 +79,3 @@ export default function displaySongList_v1(parentDiv) {
     // setTimeout(function () { parentDiv.appendChild(danzaKaduro); }, 2000);
 
     // setTimeout(function () { parentDiv.appendChild(cebuana); }, 4000);
-
-

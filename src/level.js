@@ -1,7 +1,7 @@
 const ArrowQueue = require("./arrowQueue");
 const soldTheWorld = require("./arrowArrays/soldTheWorld");
 
-export function dibujar(canvas, eLF, chosenSong) {
+export default function dibujar(canvas, eLF, chosenSong) {
     
     canvas.removeEventListener( 'click', eLF );
     let context = canvas.getContext("2d");
