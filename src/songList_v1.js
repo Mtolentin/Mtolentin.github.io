@@ -1,3 +1,4 @@
+import * as game_util from './game_util';
 import dibujar from './level';
 
 export default function displaySongList_v1(parentDiv) {
@@ -30,7 +31,6 @@ export default function displaySongList_v1(parentDiv) {
 
     setTimeout( () => {
         trackList.push(createTrack("cebuana", "trackCebuana"));
-        // debugger
         trackList[trackList.length - 1].addEventListener("animationend", 
             makeSelection(), {once: true});
     }, 2250);
@@ -43,10 +43,11 @@ export default function displaySongList_v1(parentDiv) {
         newTrack.className = "trackImg";
         newTrack.id = tID;
         newPrev.id = tID + "a";
+        newPrev.loop = true;
         parentDiv.appendChild(newTrack);
         document.getElementById("audioChannel").appendChild(newPrev);
-        newPrev.onmouseover = () => { newPrev.play; };
-        newPrev.onmouseout = () => { newPrev.pause; newPrev.load; };
+        newTrack.onmouseover = () => { newPrev.play(); };
+        newTrack.onmouseout = () => { newPrev.pause(); newPrev.load(); };
         return newTrack;
     }
     
@@ -54,7 +55,7 @@ export default function displaySongList_v1(parentDiv) {
         setTimeout( () => {
             subTxt.style.animationName = "intro4";
             trackList.forEach( (track) => {
-                track.onclick = beginStage(track.id);
+                track.onclick = () => { beginStage(track.id); };
                 track.classList.remove("trackImg");
                 track.className = "trackSelectable";
             });
@@ -62,6 +63,7 @@ export default function displaySongList_v1(parentDiv) {
     }
 
     function beginStage(trackID) {
+        document.getElementById("fXSelect").play();
         debugger
     }
 }
