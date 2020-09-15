@@ -37,33 +37,45 @@ export default function displaySongList_v1(parentDiv) {
     
     function createTrack(tSrc, tID) {
         let newTrack = document.createElement("img");
+        let newPrev = document.createElement("audio");
         newTrack.src = "./dist/assets/gui/banners/" + tSrc + ".png";
+        newPrev.src = "./dist/assets/songs/previews/" + tSrc + ".ogg";
         newTrack.className = "trackImg";
         newTrack.id = tID;
+        newPrev.id = tID + "a";
         parentDiv.appendChild(newTrack);
-        // parentDiv.insertBefore(newTrack, menuTitle);
+        document.getElementById("audioChannel").appendChild(newPrev);
+        newPrev.onmouseover = () => { newPrev.play; };
+        newPrev.onmouseout = () => { newPrev.pause; newPrev.load; };
         return newTrack;
     }
-
+    
     function makeSelection() {
-        console.log("ready");
         setTimeout( () => {
             subTxt.style.animationName = "intro4";
             trackList.forEach( (track) => {
+                track.onclick = beginStage(track.id);
                 track.classList.remove("trackImg");
                 track.className = "trackSelectable";
-                switch (trackList.indexOf(track)) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                }
-            })
+            });
         }, 750);
     }
+
+    function beginStage(trackID) {
+        debugger
+    }
 }
+
+    // function deleteChild() { 
+    //     var e = document.querySelector("ul"); 
+        
+    //     //e.firstElementChild can be used. 
+    //     var child = e.lastElementChild;  
+    //     while (child) { 
+    //         e.removeChild(child); 
+    //         child = e.lastElementChild; 
+    //     } 
+    // } 
 
 
     // let nirvana = document.createElement("img");
