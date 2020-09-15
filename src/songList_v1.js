@@ -13,7 +13,6 @@ export default function displaySongList_v1(parentDiv) {
     fXClick.id = "fXClick";
     fXClick.src = "./dist/assets/sounds/click.ogg";
     document.getElementById("audioChannel").appendChild(fXClick);
-
     
     let subTxt = document.createElement("div");
     subTxt.id = "txtSubTxt";
@@ -53,6 +52,14 @@ export default function displaySongList_v1(parentDiv) {
             trackList.forEach( (track) => {
                 track.classList.remove("trackImg");
                 track.className = "trackSelectable";
+                switch (trackList.indexOf(track)) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                }
             })
         }, 750);
     }
