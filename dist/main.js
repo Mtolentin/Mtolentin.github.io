@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nlet cebuana = [];\n\n// cebua
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nlet danzaKaduro = [];\n\ndanzaKaduro = danzaKaduro.concat(\n    [[12345, \"ArrowRight\"], [13345, \"ArrowRight\"], [14345, \"ArrowRight\"]]\n);\n\ndanzaKaduro = danzaKaduro.concat(\n    [[12345, \"ArrowRight\"], [13345, \"ArrowRight\"], [14345, \"ArrowRight\"],\n    [12345, \"ArrowRight\"], [13345, \"ArrowRight\"], [14345, \"ArrowRight\"]]\n);\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (danzaKaduro);\n\n//# sourceURL=webpack:///./src/arrowArrays/danzaKaduro.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nlet danzaKaduro = [];\n\ndanzaKaduro = danzaKaduro.concat(\n    [[12345, \"ArrowRight\"], [13345, \"ArrowRight\"], [14345, \"ArrowRight\"]]\n);\n\ndanzaKaduro = danzaKaduro.concat(\n    [[12345, \"ArrowRight\"], [13345, \"ArrowRight\"], [14345, \"ArrowRight\"],\n    [12345, \"ArrowRight\"], [13345, \"ArrowRight\"], [14345, \"ArrowRight\"]]\n);\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (danzaKaduro);\n\n\n//# sourceURL=webpack:///./src/arrowArrays/danzaKaduro.js?");
 
 /***/ }),
 
