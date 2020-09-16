@@ -2,6 +2,7 @@ export function screenFade() {
   let bgFade = document.createElement("div");
   bgFade.id = "fader";
   document.getElementById("gameScreen").appendChild(bgFade);
+  
 }
 
 export function playSelectMusic() {

@@ -1,13 +1,19 @@
 const ArrowQueue = require("./arrowQueue");
 const soldTheWorld = require("./arrowArrays/soldTheWorld");
+const cebuana = require("./arrowArrays/cebuana");
 
-export default function dibujar(canvas, eLF, chosenSong) {
-    
-    canvas.removeEventListener( 'click', eLF );
+export default function dibujar(chosenSong) {
+    document.getElementById("fader2").remove();
+    let parentDiv = document.getElementById("gameScreen");
+    let canvas = document.createElement("canvas");
+    canvas.width = 800;
+    canvas.height = 600;
+    parentDiv.appendChild(canvas);
     let context = canvas.getContext("2d");
     let particles = [];
     let newVideo = document.createElement("video");
-    newVideo.id = "playing"; newVideo.controls = false;
+    newVideo.id = "playing";
+    newVideo.controls = false;
     newVideo.muted = false;
     newVideo.width = "800";
     newVideo.height = "600";
@@ -15,8 +21,18 @@ export default function dibujar(canvas, eLF, chosenSong) {
     let stageQueue = [];
 
     switch (chosenSong) {
-        default:
-            newVideo.src = "./dist/assets/songs/hallAndOats.mp4";
+        case "trackNirvana":
+            newVideo.src = "./dist/assets/songs/soldTheWorld.mp4";
+            stageQueue = soldTheWorld.default;
+            speed = 20;
+            break;
+        case "trackDanzaKaduro":
+            newVideo.src = "./dist/assets/songs/danzaKaduro.mp4";
+            stageQueue = soldTheWorld.default;
+            speed = 20;
+            break;
+        case "trackCebuana":
+            newVideo.src = "./dist/assets/songs/cebuana.mp4";
             stageQueue = soldTheWorld.default;
             speed = 20;
             break;
@@ -24,16 +40,12 @@ export default function dibujar(canvas, eLF, chosenSong) {
 
     stageQueue.forEach( note => { note[0] -= 2700; })
 
-    let parentDiv = document.getElementById("theCanvas");
     parentDiv.appendChild(newVideo);
     parentDiv.insertBefore(newVideo, canvas);
     let stageArrow = new Image();
     let queueArrow = new Image();
     stageArrow.src = "./dist/assets/gui/arrows/aStage.png";
     queueArrow.src = "./dist/assets/gui/arrows/aNote.png";
-
-    newVideo.play();
-    
 
     function Particle( x, y ) {
         this.x = x;
@@ -83,6 +95,7 @@ export default function dibujar(canvas, eLF, chosenSong) {
         }
     }
 
+    newVideo.play();
     newVideo.onplaying = function () { console.log(Date.now()); animate(); }    
     
     function animate() {

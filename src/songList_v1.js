@@ -1,5 +1,5 @@
-import * as game_util from './game_util';
 import dibujar from './level';
+import design from './listen';
 
 export default function displaySongList_v1(parentDiv) {
 
@@ -64,7 +64,26 @@ export default function displaySongList_v1(parentDiv) {
 
     function beginStage(trackID) {
         document.getElementById("fXSelect").play();
-        debugger
+        let bgfade2 = document.createElement("div");
+        bgfade2.id = "fader2";
+        parentDiv.appendChild(bgfade2);
+        setTimeout( () => {
+            let del = parentDiv.firstElementChild;
+            while (parentDiv.childNodes.length > 1) {
+                if (del.id == "fader2") { continue; }
+                parentDiv.removeChild(del);
+                del = parentDiv.firstElementChild;
+            }
+            let clearPrevs = document.getElementById("audioChannel");
+            del = clearPrevs.lastElementChild;
+            while (clearPrevs.childNodes.length > 1) {
+                if (del.id == "fXSelect") { continue; }
+                clearPrevs.removeChild(del);
+                del = clearPrevs.lastElementChild;
+            }
+            // dibujar(trackID);
+            design(trackID);
+        }, 3000)
     }
 }
 
