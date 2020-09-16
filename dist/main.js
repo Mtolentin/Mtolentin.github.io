@@ -102,10 +102,11 @@ eval("__webpack_require__.r(__webpack_exports__);\nlet cebuana = [];\n\ncebuana 
 /*!****************************************!*\
   !*** ./src/arrowArrays/danzaKaduro.js ***!
   \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("\n\n//# sourceURL=webpack:///./src/arrowArrays/danzaKaduro.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nlet cebuana = [];\n\ncebuana = cebuana.concat(\n    [[12345, \"ArrowRight\"], [13345, \"ArrowRight\"], [14345, \"ArrowRight\"]]\n);\n\ncebuana = cebuana.concat(\n    [[12345, \"ArrowRight\"], [13345, \"ArrowRight\"], [14345, \"ArrowRight\"],\n    [12345, \"ArrowRight\"], [13345, \"ArrowRight\"], [14345, \"ArrowRight\"]]\n);\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (cebuana);\n\n//# sourceURL=webpack:///./src/arrowArrays/danzaKaduro.js?");
 
 /***/ }),
 
