@@ -9,7 +9,6 @@ ArrowQueue.prototype.spawn = function spawn(direction, bpm, hitTime) {
         direction: direction,
         pos: 10,
         spd: bpm / 3.4,
-        combo: true,
         hitTime: hitTime
     }
     this.arrows.push(arrow);

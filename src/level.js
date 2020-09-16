@@ -1,5 +1,6 @@
 const ArrowQueue = require("./arrowQueue");
 const soldTheWorld = require("./arrowArrays/soldTheWorld");
+const danzaKaduro = require("./arrowArrays/danzaKaduro");
 const cebuana = require("./arrowArrays/cebuana");
 
 export default function dibujar(chosenSong) {
@@ -9,6 +10,15 @@ export default function dibujar(chosenSong) {
     canvas.width = 800;
     canvas.height = 600;
     parentDiv.appendChild(canvas);
+
+    let verdict = document.createElement("img");
+    verdict.src = "./dist/assets/gui/judge.png";
+    verdict.id = "verdict";
+
+    let comboScore = document.createElement("div");
+    comboScore.innerText = "0 combo";
+    comboScore.id = "comboScore";
+
     let context = canvas.getContext("2d");
     let particles = [];
     let newVideo = document.createElement("video");
@@ -28,12 +38,12 @@ export default function dibujar(chosenSong) {
             break;
         case "trackDanzaKaduro":
             newVideo.src = "./dist/assets/songs/danzaKaduro.mp4";
-            stageQueue = soldTheWorld.default;
+            stageQueue = danzaKaduro.default;
             speed = 20;
             break;
         case "trackCebuana":
             newVideo.src = "./dist/assets/songs/cebuana.mp4";
-            stageQueue = soldTheWorld.default;
+            stageQueue = cebuana.default;
             speed = 20;
             break;
     }
@@ -99,8 +109,8 @@ export default function dibujar(chosenSong) {
     newVideo.onplaying = function () { console.log(Date.now()); animate(); }    
     
     function animate() {
-        let theQueue = new ArrowQueue(context);
         let origin = Date.now();
+        let theQueue = new ArrowQueue(context);
         console.log(Date.now() - origin);
         document.addEventListener("keydown", registerPress);
         let numColumns = 5;
@@ -114,6 +124,7 @@ export default function dibujar(chosenSong) {
 
         function registerPress(evt) {
             evt.preventDefault();
+            theQueue.judge(evt.key);
             switch (evt.key) {
                 case "ArrowLeft": createParticles(218, 69); break;
                 case "ArrowDown": createParticles(342, 69); break;
@@ -121,7 +132,8 @@ export default function dibujar(chosenSong) {
                 case "ArrowRight": createParticles(587, 69); break;
                 default: break;
             }
-            console.log([(Date.now() - origin) / 1000, evt.key]);
+
+            // console.log([(Date.now() - origin) / 1000, evt.key]);
         }
 
 
@@ -181,7 +193,7 @@ export default function dibujar(chosenSong) {
             // debugger
             theQueue.move(context);
             if (stageQueue[0]) {
-                if (Date.now() - origin >= stageQueue[0][0]) {
+                while (Date.now() - origin >= stageQueue[0][0]) {
                     theQueue.spawn(stageQueue[0][1], speed);
                     stageQueue.shift();
                 }
@@ -193,6 +205,7 @@ export default function dibujar(chosenSong) {
                 })
             }  
         }, speed);
+
         newVideo.onended = function () { clearInterval(stageLoop); }
     }
 }

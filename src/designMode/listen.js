@@ -4,7 +4,7 @@ const soldTheWorld = require("../arrowArrays/soldTheWorld");
 const danzaKaduro = require("../arrowArrays/danzaKaduro");
 const cebuana = require("../arrowArrays/cebuana");
 
-export default function dibujar(chosenSong) {
+export default function design(chosenSong) {
     document.getElementById("fader2").remove();
     let parentDiv = document.getElementById("gameScreen");
     let canvas = document.createElement("canvas");
@@ -30,12 +30,12 @@ export default function dibujar(chosenSong) {
             break;
         case "trackDanzaKaduro":
             newVideo.src = "./dist/assets/songs/danzaKaduro.mp4";
-            stageQueue = soldTheWorld.default;
+            stageQueue = danzaKaduro.default;
             speed = 20;
             break;
         case "trackCebuana":
             newVideo.src = "./dist/assets/songs/cebuana.mp4";
-            stageQueue = soldTheWorld.default;
+            stageQueue = cebuana.default;
             speed = 20;
             break;
     }
@@ -162,8 +162,6 @@ export default function dibujar(chosenSong) {
                     frameWidth, frameHeight, arrowParams[1][0], arrowParams[1][1], 
                     frameWidth, frameHeight);
                 context.restore();
-            } else {
-
             }
         }
 

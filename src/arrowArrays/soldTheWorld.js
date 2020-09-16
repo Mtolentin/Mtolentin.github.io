@@ -13,12 +13,3 @@ soldTheWorld = soldTheWorld.concat(
 
 export default soldTheWorld;
 
-// Fantastic: +/- 21.5 ms
-
-// Excellent: +/- 43 ms
-
-// Great: +/- 102 ms
-
-// Decent: +/- 135 ms
-
-// Way Off: +/- 180 ms
