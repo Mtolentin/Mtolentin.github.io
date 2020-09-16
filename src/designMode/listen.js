@@ -1,7 +1,8 @@
 // const ArrowQueue = require("./arrowQueue");
-const ArrowQueue = require("./arrowQueueL");
-const soldTheWorld = require("./arrowArrays/soldTheWorld");
-const cebuana = require("./arrowArrays/cebuana");
+const ArrowQueue = require("./recordingQueue");
+const soldTheWorld = require("../arrowArrays/soldTheWorld");
+const danzaKaduro = require("../arrowArrays/danzaKaduro");
+const cebuana = require("../arrowArrays/cebuana");
 
 export default function dibujar(chosenSong) {
     document.getElementById("fader2").remove();
@@ -100,8 +101,8 @@ export default function dibujar(chosenSong) {
     newVideo.onplaying = function () { animate(); }    
     
     function animate() {
-        let theQueue = new ArrowQueue();
         let origin = Date.now();
+        let theQueue = new ArrowQueue();
         console.log(Date.now() - origin);
         document.addEventListener("keydown", registerPress);
         let numColumns = 5;
@@ -117,16 +118,11 @@ export default function dibujar(chosenSong) {
             let theSkip = false;
             evt.preventDefault();
             switch (evt.key) {
-                case "ArrowLeft": createParticles(218, 69);
-                    break;
-                case "ArrowDown": createParticles(342, 69); 
-                    break;
-                case "ArrowUp": createParticles(458, 69); 
-                    break;
-                case "ArrowRight": createParticles(587, 69); 
-                    break;
-                default: theSkip = true;
-                    break;
+                case "ArrowLeft": createParticles(218, 69); break;
+                case "ArrowDown": createParticles(342, 69); break;
+                case "ArrowUp": createParticles(458, 69); break;
+                case "ArrowRight": createParticles(587, 69); break;
+                default: theSkip = true; break;
             }
             if (!theSkip) { theQueue.spawn(evt.key, speed, Date.now()); }
             // console.log([(Date.now() - origin) / 1000, evt.key]);
@@ -172,7 +168,6 @@ export default function dibujar(chosenSong) {
         }
 
         let stageLoop = setInterval(function() {
-            // console.log((Date.now() - origin) / 1000);
             currentFrame++;
             if (currentFrame > maxFrame) { currentFrame = 0; }
             column = currentFrame % numColumns;
@@ -186,14 +181,8 @@ export default function dibujar(chosenSong) {
             
             let i = particles.length;
             while( i-- ) { particles[i].draw(); particles[i].update( i ); }
-            // debugger
+
             theQueue.move(context, origin);
-            // if (stageQueue[0]) {
-            //     if (Date.now() - origin >= stageQueue[0][0]) {
-            //         theQueue.spawn(stageQueue[0][1], speed);
-            //         stageQueue.shift();
-            //     }
-            // }
 
             if (theQueue.arrows[0]) {
                 theQueue.arrows.forEach( arrow => {
@@ -201,9 +190,39 @@ export default function dibujar(chosenSong) {
                 })
             }  
         }, speed);
+
         newVideo.onended = function () { 
             clearInterval(stageLoop);
+            theQueue.scribe.forEach( (arrowSet) => {
+                arrowSet[0] -= origin; 
+            });
             console.log(theQueue.scribe); 
+            console.log(standardDeviation(theQueue.delays));
+            debugger;
+        }
+
+        function standardDeviation(values){
+            var avg = average(values);
+            
+            var squareDiffs = values.map(function(value){
+              var diff = value - avg;
+              var sqrDiff = diff * diff;
+              return sqrDiff;
+            });
+            
+            var avgSquareDiff = average(squareDiffs);
+          
+            var stdDev = Math.sqrt(avgSquareDiff);
+            return stdDev;
+        }
+          
+        function average(data){
+            var sum = data.reduce(function(sum, value){
+              return sum + value;
+            }, 0);
+          
+            var avg = sum / data.length;
+            return avg;
         }
     }
 }

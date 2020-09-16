@@ -1,5 +1,5 @@
-import dibujar from './level';
-import design from './listen';
+// import dibujar from './level';
+import design from './designMode/listen';
 
 export default function displaySongList_v1(parentDiv) {
 

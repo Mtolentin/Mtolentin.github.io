@@ -1,13 +1,14 @@
 function ArrowQueue() {
     this.arrows = [];
     this.scribe = [];
+    this.delays = [];
 }
 
 ArrowQueue.prototype.spawn = function spawn(direction, bpm, hitTime) {
     let arrow = {
         direction: direction,
         pos: 10,
-        spd: bpm / 4,
+        spd: bpm / 3.4,
         combo: true,
         hitTime: hitTime
     }
@@ -25,17 +26,11 @@ ArrowQueue.prototype.move = function move(context, origin) {
                 console.log(
                     [arrow.hitTime, delay, arrow.hitTime - delay]);
                 this.scribe.push([arrow.hitTime - delay, arrow.direction]);
+                this.delays.push(delay);
                 this.arrows.splice(this.arrows.indexOf(arrow),1);
             }
         });
     }
 }
-
-ArrowQueue.prototype.judge = function judge(key) {
-
-}
-
-
-
 
 module.exports = ArrowQueue;
