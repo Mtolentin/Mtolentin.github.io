@@ -69,9 +69,10 @@ export default function dibujar(chosenSong) {
         this.friction = 0.95;
         this.gravity = 1;
         this.hue = 70 + Math.random() * 100;
+        // this.hue = Math.random(0, 360)
         this.brightness = 50 + Math.random() * 30
         this.alpha = 1;
-        this.decay = 0.015 + Math.random() * 0.015;
+        this.decay = 0.01 + Math.random() * 0.015;
     }
 
     Particle.prototype.update = function( index ) {
@@ -86,16 +87,17 @@ export default function dibujar(chosenSong) {
 
     Particle.prototype.draw = function() {
         context.beginPath();
+        context.lineWidth = 3;
         context.moveTo( this.coordinates[ this.coordinates.length - 1 ][ 0 ], 
             this.coordinates[ this.coordinates.length - 1 ][ 1 ] );
-        context.lineTo( this.x, this.y );
-        context.strokeStyle = 'hsla(' + this.hue + ', 100%, ' 
+            context.lineTo( this.x, this.y );
+            context.strokeStyle = 'hsla(' + this.hue + ', 100%, ' 
             + this.brightness + '%, ' + this.alpha + ')';
         context.stroke();
     }
 
     function createParticles( x, y ) {
-        var particleCount = 30;
+        var particleCount = 50;
         while( particleCount-- ) { 
             particles.push( 
                 new Particle( x, y ) 
@@ -119,7 +121,6 @@ export default function dibujar(chosenSong) {
         let maxFrame = numColumns * numRows - 1;
         let column = currentFrame % numColumns;
         let row = Math.floor(currentFrame / numColumns);
-        debugger
         function registerPress(evt) {
             evt.preventDefault();
             theQueue.judge(evt.key);
@@ -194,6 +195,7 @@ export default function dibujar(chosenSong) {
                 while (Date.now() - origin >= stageQueue[0][0]) {
                     theQueue.spawn(stageQueue[0][1], speed);
                     stageQueue.shift();
+                    if (!stageQueue[0]) {break;}
                 }
             }
 
