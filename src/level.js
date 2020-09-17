@@ -48,8 +48,6 @@ export default function dibujar(chosenSong) {
             break;
     }
 
-    stageQueue.forEach( note => { note[0] -= 2700; })
-
     parentDiv.appendChild(newVideo);
     parentDiv.insertBefore(newVideo, canvas);
     let stageArrow = new Image();
@@ -121,7 +119,7 @@ export default function dibujar(chosenSong) {
         let maxFrame = numColumns * numRows - 1;
         let column = currentFrame % numColumns;
         let row = Math.floor(currentFrame / numColumns);
-
+        debugger
         function registerPress(evt) {
             evt.preventDefault();
             theQueue.judge(evt.key);

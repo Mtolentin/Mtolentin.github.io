@@ -1,10 +1,6 @@
-let cebuana = [];
 
-// cebuana = cebuana.concat(
-//     [[12345, "ArrowRight"], [13345, "ArrowRight"], [14345, "ArrowRight"]]
-// );
 
-cebuana = cebuana.concat(
+let cebuana = [
     [7688, "ArrowRight"]
     , [7683, "ArrowLeft"]
     , [9298, "ArrowRight"]
@@ -224,6 +220,6 @@ cebuana = cebuana.concat(
     , [105686, "ArrowUp"]
     , [105991, "ArrowDown"]
 
-);
+];
 
 export default cebuana;
