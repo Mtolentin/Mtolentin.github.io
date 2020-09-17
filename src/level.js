@@ -11,7 +11,7 @@ export default function dibujar(chosenSong) {
     canvas.height = 600;
     parentDiv.appendChild(canvas);
 
-    let verdict = document.createElement("img");
+    let verdict = document.createElement("div");
     verdict.src = "./dist/assets/gui/judge.png";
     verdict.id = "verdict";
 
