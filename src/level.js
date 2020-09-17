@@ -11,13 +11,17 @@ export default function dibujar(chosenSong) {
     canvas.height = 600;
     parentDiv.appendChild(canvas);
 
-    let verdict = document.createElement("div");
+    let verdict = document.createElement("img");
     verdict.src = "./dist/assets/gui/judge.png";
     verdict.id = "verdict";
+    // verdict.style.backgroundImage = url("./dist/assets/gui/judge.png");
+    parentDiv.appendChild(verdict);
+    parentDiv.insertBefore(verdict, canvas);
 
     let comboScore = document.createElement("div");
     comboScore.innerText = "0 combo";
     comboScore.id = "comboScore";
+    parentDiv.appendChild(comboScore);
 
     let context = canvas.getContext("2d");
     let particles = [];
@@ -29,6 +33,7 @@ export default function dibujar(chosenSong) {
     newVideo.height = "600";
     let speed = 0;
     let stageQueue = [];
+    let comboCount = 0;
 
     switch (chosenSong) {
         case "trackNirvana":

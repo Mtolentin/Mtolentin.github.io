@@ -1,6 +1,5 @@
 function ArrowQueue(context) {
     this.arrows = [];
-    this.comboCount = 0;
 }
 
 ArrowQueue.prototype.spawn = function spawn(direction, bpm) {
@@ -79,3 +78,36 @@ module.exports = ArrowQueue;
 // Decent: +/- 135 ms
 
 // Way Off: +/- 180 ms
+
+// switch (true) {
+//     case (timeDifference < 44):
+//         // Perfect
+//         this.comboCount += 1;
+//         continueCombo = true;
+//         break;
+//     case (timeDifference < 104):
+//         // Great
+//         this.comboCount += 1;
+//         continueCombo = true;
+//         break;
+//     case (timeDifference < 138):
+//         // Good
+//         break;
+//     case (timeDifference < 184):
+//         // Boo
+//         break;
+//     default:
+//         continueCombo = true;
+//         break;
+// }
+
+// if (continueCombo) {
+//     if (this.comboCount > 3) {
+
+//     } else {
+
+//     }
+
+// } else {
+//     this.comboCount = 0;
+// }
