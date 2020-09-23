@@ -74,7 +74,6 @@ export default function dibujar(chosenSong) {
         this.friction = 0.95;
         this.gravity = 1;
         this.hue = 70 + Math.random() * 100;
-        // this.hue = Math.random(0, 360)
         this.brightness = 50 + Math.random() * 30
         this.alpha = 1;
         this.decay = 0.01 + Math.random() * 0.015;
