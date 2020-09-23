@@ -106,7 +106,7 @@ export default function dibujar(chosenSong) {
     }
 
     newVideo.play();
-    newVideo.onplaying = function () { console.log(Date.now()); animate(); }    
+    newVideo.onplaying = () => { animate(); };
     
     function animate() {
         let origin = Date.now();
