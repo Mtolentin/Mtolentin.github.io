@@ -42,6 +42,7 @@ export default function displaySongList_v1(parentDiv) {
         newPrev.src = "./dist/assets/songs/previews/" + tSrc + ".ogg";
         newTrack.className = "trackImg";
         newTrack.id = tID;
+        newTrack.muted = true;
         newPrev.id = tID + "a";
         newPrev.loop = true;
         parentDiv.appendChild(newTrack);
@@ -58,6 +59,7 @@ export default function displaySongList_v1(parentDiv) {
                 track.onclick = () => { beginStage(track.id); };
                 track.classList.remove("trackImg");
                 track.className = "trackSelectable";
+                document.getElementById(track.id+"a").muted = false;
             });
         }, 750);
     }

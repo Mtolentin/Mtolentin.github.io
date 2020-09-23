@@ -1,8 +1,25 @@
 #verdict{
-    height: 102px;
-    width: 766px;
+    object-fit: cover;
+    position: absolute;
+    object-position: 0px 0px;
+    top: 162px;
+    left: 317px;
+    height: 34px;
+    width: 265px;
+    z-index: 6;
+    clip: rect(0px,717px,37px, 0px);
+    display: none;
 }
 
-#comboScore{
-
+#comboScore {
+    position: absolute;
+    text-align: center;
+    width: 800px;
+    top: 204px;
+    left: 116px;
+    font-family: righteous;
+    font-size: 34px;
+    z-index: 6;
+    color: darkmagenta;
+    display: none;
 }
