@@ -1,25 +1,24 @@
-#verdict{
-    object-fit: cover;
-    position: absolute;
-    object-position: 0px 0px;
-    top: 162px;
-    left: 317px;
-    height: 34px;
-    width: 265px;
-    z-index: 6;
-    clip: rect(0px,717px,37px, 0px);
-    display: none;
+/* Centering the main element  */
+#gameScreen {
+    width: 800px;
+    height: 600px;
+    margin: 0px auto;
 }
 
-#comboScore {
+video {
     position: absolute;
-    text-align: center;
-    width: 800px;
-    top: 204px;
-    left: 116px;
-    font-family: righteous;
-    font-size: 34px;
-    z-index: 6;
-    color: darkmagenta;
-    display: none;
+    object-fit: fill;
+    overflow: hidden;
+    z-index: 4;
 }
+
+canvas {
+    position: absolute;
+    z-index: 5;
+    margin: 0px auto;
+}
+
+#theCanvas {
+    z-index: 5;
+}
+

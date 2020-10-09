@@ -22,7 +22,7 @@ setTimeout(function () { parentDiv.appendChild(introText2); }, 4500);
 parentDiv.addEventListener('click', loadMenu, {once: true} );
 
 
-function loadMenu(evt = null) {
+export default function loadMenu(evt = null) {
     fXSelect.play();
     game_util.screenFade();
     setTimeout( function() {
@@ -36,66 +36,5 @@ function loadMenu(evt = null) {
         bgSongList.addEventListener( "animationend", () => {
             displaySongList_v1(parentDiv)}, {once: true} 
         );
-
     }, 2000);
-
 }
-
-
-    // setTimeout(() => {
-    //     trackList.forEach((track) => {
-    //         debugger
-    //         track.className = "trackSelectable";
-    //     });
-    // })
-
-
-// Testing Codes
-
-{/* <script>
-var currentPlayer;
-function EvalSound(soundobj) {
-
- var thissound=document.getElementById(soundobj);
- if(currentPlayer  && currentPlayer != thissound) {
-  currentPlayer.pause(); 
- }
- if (thissound.paused)
-        thissound.play();
-    else
-    thissound.pause();
-    thissound.currentTime = 0;
-     currentPlayer = thissound;
-}
-</script> */}
-
-// function initButtonTest(evt) {
-//     fXSelect.play();
-//     const offset = canvas.getBoundingClientRect();
-//     let rect = {
-//         x: 250 + offset.x,
-//         y: 350 + offset.y,
-//         width: 200,
-//         height: 100
-//     };
-//     const pos = {
-//         x: evt.clientX,
-//         y: evt.clientY
-//     };
-    
-
-//     if (pos.x > rect.x &&
-//         pos.x < rect.x + rect.width &&
-//         pos.y < rect.y + rect.height &&
-//         pos.y > rect.y) {
-
-
-//         game.play(canvas, initButtonTest, "testSong");
-
-//     } else {
-//         console.log("Outside");
-//     }
-// }
-
-
-

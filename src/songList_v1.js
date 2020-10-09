@@ -23,17 +23,17 @@ export default function displaySongList_v1(parentDiv) {
     let trackList = [];
     setTimeout( () => {
         trackList.push(createTrack("nirvana", "trackNirvana"));
-    }, 750);
+    }, 550);
 
     setTimeout( () => {
         trackList.push(createTrack("danzaKaduro", "trackDanzaKaduro"));
-    }, 1500);
+    }, 1300);
 
     setTimeout( () => {
         trackList.push(createTrack("cebuana", "trackCebuana"));
         trackList[trackList.length - 1].addEventListener("animationend", 
             makeSelection(), {once: true});
-    }, 2250);
+    }, 1950);
     
     function createTrack(tSrc, tID) {
         let newTrack = document.createElement("img");
@@ -48,8 +48,17 @@ export default function displaySongList_v1(parentDiv) {
         newPrev.loop = true;
         parentDiv.appendChild(newTrack);
         document.getElementById("audioChannel").appendChild(newPrev);
-        newTrack.onmouseover = () => { newPrev.play(); };
-        newTrack.onmouseout = () => { newPrev.pause(); newPrev.load(); };
+        let newPromise;
+        newTrack.onmouseover = () => { newPromise = newPrev.play(); };
+        newTrack.onmouseout = () => { 
+            if (newPromise !== undefined) {
+                newPromise.then ( () => {
+                    newPrev.pause();
+                    newPrev.load(); 
+                })
+            } else {
+                newPromise.catch ( err => {} )
+            }};
         return newTrack;
     }
     
@@ -89,36 +98,3 @@ export default function displaySongList_v1(parentDiv) {
         }, 3000)
     }
 }
-
-    // function deleteChild() { 
-    //     var e = document.querySelector("ul"); 
-        
-    //     //e.firstElementChild can be used. 
-    //     var child = e.lastElementChild;  
-    //     while (child) { 
-    //         e.removeChild(child); 
-    //         child = e.lastElementChild; 
-    //     } 
-    // } 
-
-
-    // let nirvana = document.createElement("img");
-    // nirvana.src = "./dist/assets/gui/banners/nirvana.png";
-    // nirvana.className = "trackImg";
-    // nirvana.id = "trackNirvana";
-    
-    // let danzaKaduro = document.createElement("img");
-    // danzaKaduro.src = "./dist/assets/gui/banners/danzaKaduro.png";
-    // danzaKaduro.className = "trackImg";
-    // danzaKaduro.id = "trackDanzaKaduro";
-    
-    // let cebuana = document.createElement("img");
-    // cebuana.src = "./dist/assets/gui/banners/cebuana.png";
-    // cebuana.className = "trackImg";
-    // cebuana.id = "trackCebuana";
-
-    // parentDiv.appendChild(nirvana);
-
-    // setTimeout(function () { parentDiv.appendChild(danzaKaduro); }, 2000);
-
-    // setTimeout(function () { parentDiv.appendChild(cebuana); }, 4000);
